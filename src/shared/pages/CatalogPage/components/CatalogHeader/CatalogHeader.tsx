@@ -1,4 +1,3 @@
-
 import styles from './CatalogHeader.module.scss'
 
 export const CatalogHeader = () => {

@@ -102,7 +102,6 @@ export const ProductsList = () => {
                       actionSlot={
                         <CartButton
                           productId={product.id}
-                          isInCart={isInCart}
                         />
                       }
                     />

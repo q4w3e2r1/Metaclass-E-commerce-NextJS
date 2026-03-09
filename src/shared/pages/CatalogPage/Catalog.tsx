@@ -1,5 +1,3 @@
-
-
 import styles from './Catalog.module.scss'
 import CatalogHeader from './components/CatalogHeader';
 import CatalogSearch from './components/CatalogSearch';

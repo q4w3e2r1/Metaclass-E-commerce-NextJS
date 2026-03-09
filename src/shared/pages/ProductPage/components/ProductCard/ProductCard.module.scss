@@ -16,18 +16,18 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap:variables.$space-xl;
+    gap: variables.$space-xl;
     align-items: start;
 
-    @include mixins.respond('md'){  
+    @include mixins.respond('md') {
         flex-direction: row;
     }
 
-    img{
+    .image {
         width: 100%;
         max-width: 600px;
         min-width: 200px;
-        height: auto;
+        height: auto !important;
         object-fit: contain;
         margin: 0 auto;
     }

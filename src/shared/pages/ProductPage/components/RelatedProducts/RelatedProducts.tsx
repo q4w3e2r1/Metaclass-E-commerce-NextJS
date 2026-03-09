@@ -53,7 +53,7 @@ export const RelatedProducts = ({categoryId, excludeDocumentId}: RelatedProducts
                                 subtitle={product.description}
                                 contentSlot={<span>{product.price}</span>}
                                 actionSlot={
-                                    <CartButton productId={product.id} isInCart={isInCart} />
+                                    <CartButton productId={product.id} />
                                 }
                             />
                         </Link>

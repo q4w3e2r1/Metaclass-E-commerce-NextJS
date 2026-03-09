@@ -1,8 +1,3 @@
-
-import { Input } from "@/shared/components/common";
-import ArrowDownIcon from "@/shared/components/common/ArrowDownIcon";
-import Button from "@/shared/components/common/Button";
-
 export default function NotFound() {
     return (
       <div>

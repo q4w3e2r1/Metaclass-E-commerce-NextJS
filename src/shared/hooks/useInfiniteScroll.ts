@@ -1,6 +1,6 @@
 'use client'
 import { useRef, useEffect, useCallback, useMemo, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 interface UseInfiniteScrollProps {
   hasNextPage?: boolean;
@@ -29,88 +29,82 @@ export const useInfiniteScroll = ({
   const initialRestoreDoneRef = useRef(false);
   const isFirstRestoreAttempted = useRef(false);
 
+  const [mounted, setMounted] = useState(false);
   const [searchParams] = [useSearchParams()];
-  const router = useRouter();
+  const isRestoringRef = useRef(false);
   const [isRestoring, setIsRestoring] = useState(false);
 
-  // Всегда читаем из window.location.search для актуальности
   const setSearchParams = useCallback(
     (params: URLSearchParams) => {
-      router.push(`?${params.toString()}`, { scroll: false });
+      window.history.replaceState(null, '', `?${params.toString()}`);
     },
-    [router]
+    []
   );
 
   const targetPageFromUrl = useMemo(() => {
-    const raw = Number(searchParams.get("page"));
+    if (typeof window === 'undefined') return 1;
+    const raw = Number(new URLSearchParams(window.location.search).get("page"));
     return raw && raw > 1 ? raw : 1;
-}, [searchParams]);
+  }, [searchParams, mounted]);
+
+  useEffect(() => {
+    isFirstRestoreAttempted.current = false;
+    initialRestoreDoneRef.current = false;
+    lastPageRef.current = 1;
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
 
   useEffect(() => {
     if (!loaderRef.current) return;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (
-          entry.isIntersecting &&
-          hasNextPage &&
-          !isFetchingNextPage &&
-          !isRestoring
-        ) {
+        if (entry.isIntersecting && hasNextPage && !isFetchingNextPage && !isRestoring) {
           fetchNextPage?.();
         }
       },
       { rootMargin: "300px" }
     );
-
     observer.observe(loaderRef.current);
     return () => observer.disconnect();
   }, [hasNextPage, isFetchingNextPage, fetchNextPage, isRestoring]);
 
+  // Восстановление скролла после перезагрузки страницы
   useEffect(() => {
     if (targetPageFromUrl <= 1) return;
-
     if (targetPageFromUrl > totalPages) {
-      if (hasNextPage && !isFetchingNextPage) {
-        fetchNextPage?.();
-      }
+      if (hasNextPage && !isFetchingNextPage) fetchNextPage?.();
       return;
     }
-
-    if (isFirstRestoreAttempted.current || targetPageFromUrl <= 1) return;
+    if (isFirstRestoreAttempted.current) return;
 
     const el = pageRefs.current.get(targetPageFromUrl);
     if (!el) return;
 
     isFirstRestoreAttempted.current = true;
+    isRestoringRef.current = true;
     setIsRestoring(true);
 
-    el.scrollIntoView({ behavior: "auto", block: "start" });
+    const top = el.getBoundingClientRect().top + window.scrollY - 100;
+    window.scrollTo({ top, behavior: 'auto' });
 
     const completeRestoration = () => {
       lastPageRef.current = targetPageFromUrl;
-
-      // Читаем актуальные параметры из window
       const currentParams = new URLSearchParams(window.location.search);
       currentParams.set("page", String(targetPageFromUrl));
       setSearchParams(currentParams);
-
       setIsRestoring(false);
+      isRestoringRef.current = false;
       initialRestoreDoneRef.current = true;
     };
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(completeRestoration);
-    });
+    requestAnimationFrame(() => requestAnimationFrame(completeRestoration));
   }, [targetPageFromUrl, totalPages]);
 
   const updateUrlPage = useCallback(
     (page: number) => {
       if (lastPageRef.current === page) return;
-
       lastPageRef.current = page;
-
-      // Читаем актуальные параметры из window — не из хука
       const currentParams = new URLSearchParams(window.location.search);
       currentParams.set("page", String(page));
       setSearchParams(currentParams);
@@ -124,21 +118,18 @@ export const useInfiniteScroll = ({
         pageRefs.current.delete(pageNumber);
         return;
       }
-
       pageRefs.current.set(pageNumber, el);
 
       if (!pageObserverRef.current) {
         pageObserverRef.current = new IntersectionObserver(
           (entries) => {
-            if (isRestoring) return;
-
+            if (isRestoringRef.current) return;
             let bestPage = null;
             let minAbsTop = Infinity;
 
             for (let i = 0; i < entries.length; i++) {
               const entry = entries[i];
               const top = entry.boundingClientRect.top;
-
               if (top <= 120) {
                 const absTop = Math.abs(top);
                 if (absTop < minAbsTop) {
@@ -147,25 +138,20 @@ export const useInfiniteScroll = ({
                 }
               }
             }
-
-            if (bestPage !== null) {
-              updateUrlPage(bestPage);
-            }
+            if (bestPage !== null) updateUrlPage(bestPage);
           },
           { threshold: 0 }
         );
       }
-
       pageObserverRef.current.observe(el);
     },
-    [updateUrlPage, isRestoring]
+    [updateUrlPage]
   );
 
   useEffect(() => {
     if (targetPageFromUrl > 1 && !initialRestoreDoneRef.current) {
       const params = new URLSearchParams(window.location.search);
       const currentPageInUrl = params.get("page");
-
       if (currentPageInUrl !== String(targetPageFromUrl)) {
         params.set("page", String(targetPageFromUrl));
         setSearchParams(params);
@@ -174,15 +160,8 @@ export const useInfiniteScroll = ({
   }, [targetPageFromUrl, setSearchParams]);
 
   useEffect(() => {
-    return () => {
-      pageObserverRef.current?.disconnect();
-    };
+    return () => pageObserverRef.current?.disconnect();
   }, []);
 
-  return {
-    loaderRef,
-    observePage,
-    isRestoring,
-    targetPageFromUrl,
-  };
+  return { loaderRef, observePage, isRestoring, targetPageFromUrl };
 };

@@ -1,5 +1,4 @@
-"use client";
-import React, { useState } from 'react';
+import React from 'react';
 import Text from '../Text';
 import styles from './Card.module.scss';
 
@@ -24,21 +23,16 @@ const Card: React.FC<CardProps> = ({
   onClick,
   actionSlot,
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <div
-      className={`${styles.card} ${isHovered ? styles.hovered : ''} ${className}`}
+      className={`${styles.card} ${className}`}
       onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       <img
         src={image}
         alt={`Картинка карточки ${title}`}
         className={styles.image}
       />
-
       <div className={styles.contentCard}>
         <div className={styles.contentText}>
           {captionSlot && (
@@ -53,7 +47,6 @@ const Card: React.FC<CardProps> = ({
             {subtitle}
           </Text>
         </div>
-
         <div className={styles.footer}>
           <div className={styles.contentSlot}>${contentSlot}</div>
           {actionSlot}

@@ -1,5 +1,4 @@
-"use client";
-import React, { useMemo } from 'react';
+import React from 'react';
 import styles from './Text.module.scss';
 
 export type TextProps = {
@@ -21,27 +20,20 @@ const Text: React.FC<TextProps> = ({
   color,
   maxLines,
 }) => {
-
   const Tag = tag ?? 'span';
 
-  const classNames = useMemo(
-    () =>
-      [
-        styles.text,
-        view && styles[view],
-        weight && styles[`weight-${weight}`],
-        color && styles[`color-${color}`],
-        maxLines && styles.maxLines,
-        className,
-      ]
-        .filter(Boolean)
-        .join(' '),
-    [view, weight, color, maxLines, className, styles]
-  );
+  const classNames = [
+    styles.text,
+    view && styles[view],
+    weight && styles[`weight-${weight}`],
+    color && styles[`color-${color}`],
+    maxLines && styles.maxLines,
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-  const style = maxLines
-    ? { WebkitLineClamp: maxLines }
-    : undefined;
+  const style = maxLines ? { WebkitLineClamp: maxLines } : undefined;
 
   return <Tag className={classNames} style={style}>{children}</Tag>;
 };

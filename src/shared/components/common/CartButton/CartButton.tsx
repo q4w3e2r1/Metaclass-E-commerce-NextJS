@@ -1,24 +1,27 @@
 "use client";
 import { Button } from '@components';
 import { useCart } from '@hooks/cart/useCartQuery';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import type { ReactNode } from 'react';
 
 interface CartButtonProps {
   productId: number;
-  isInCart: boolean;
   className?: string;
   children?: ReactNode;
 }
 
 export const CartButton = ({ 
   productId, 
-  isInCart,
   className = '',
   children 
 }: CartButtonProps) => {
-  const { addToCart, removeFromCart } = useCart();
+  const { cart, addToCart, removeFromCart } = useCart();
   const [showLoading, setShowLoading] = useState(false);
+  
+  const isInCart = useMemo(() => {
+    return cart?.some(item => item.product.id === productId) ?? false;
+  }, [cart, productId]);
+  
   const prevIsInCartRef = useRef(isInCart);
 
   useEffect(() => {
