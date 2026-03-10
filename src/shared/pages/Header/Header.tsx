@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import styles from './Header.module.scss';
+import { routes } from '@config/routes';
 
 export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <Link href="/" className={styles.logo}>
+        <Link href={routes.main.getRoute()} className={styles.logo}>
           <img src="/Frame.svg" alt="logo" />
           <img src="/Lalasia.svg" alt="Lalasia" />
         </Link>

@@ -53,6 +53,7 @@ export const CartButton = ({
       onClick={handleClick}
       className={className}
       loading={showLoading}
+      minWidth={155}
     >
       {children || (isInCart ? "Delete from Cart" : "Add to Cart")}
     </Button>

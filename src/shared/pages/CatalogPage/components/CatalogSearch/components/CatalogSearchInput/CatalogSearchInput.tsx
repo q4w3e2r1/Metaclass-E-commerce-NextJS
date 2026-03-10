@@ -34,7 +34,7 @@ export const CatalogSearchInput = () => {
                 placeholder='Search product'
                 onChange={setSearchValue}
             />
-            <Button onClick={handleSearchSubmit}>Find now</Button>
+            <Button onClick={handleSearchSubmit} minWidth={137}>Find now</Button>
         </div>
     );
 };

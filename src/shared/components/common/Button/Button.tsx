@@ -5,6 +5,7 @@ import styles from './Button.module.scss';
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   loading?: boolean;
   children: React.ReactNode;
+  minWidth?: number;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -13,6 +14,7 @@ const Button: React.FC<ButtonProps> = ({
   className = '',
   disabled,
   style,
+  minWidth,
   ...props
 }) => {
   const isDisabled = loading || disabled;
@@ -22,6 +24,7 @@ const Button: React.FC<ButtonProps> = ({
       {...props}
       disabled={isDisabled}
       className={`${styles.button} ${className}`}
+      style={{ minWidth: minWidth ? `${minWidth}px` : undefined, ...style }}
     >
       {loading && <Loader size="s" className="ChangeColor" />}
       {children}

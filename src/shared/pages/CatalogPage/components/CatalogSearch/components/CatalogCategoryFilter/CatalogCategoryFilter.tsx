@@ -45,9 +45,9 @@ export const CatalogCategoryFilter = () => {
     const displayedCategories = pendingCategories ?? selectedCategories;
 
     const getCategoriesTitle = (selected: Option[]): string => {
-        if (selected.length === 0) return 'Все категории';
+        if (selected.length === 0) return 'All categories';
         if (selected.length === 1) return selected[0].value;
-        return `Выбрано: ${selected.length}`;
+        return `Selected: ${selected.length}`;
     };
 
     const handleCategoriesChange = (selected: Option[]) => {

@@ -1,11 +1,9 @@
-
 import Image from 'next/image';
-import { getProductById } from '@api/products';
+import { getProductById, getRelatedProductsByCategory } from '@api/products';
 import { notFound } from 'next/navigation';
 import { Button, CartButton } from '@components';
 import styles from './ProductCard.module.scss';
 import RelatedProducts from '../RelatedProducts';
-
 
 interface ProductCardProps {
   productId: string;
@@ -16,6 +14,12 @@ export const ProductCard = async ({ productId }: ProductCardProps) => {
 
     if (!data) notFound();
 
+    const [relatedProducts] = await Promise.all([
+        data.productCategory
+            ? getRelatedProductsByCategory(data.productCategory.id, data.documentId).catch(() => null)
+            : Promise.resolve(null),
+    ]);
+
     const imageUrl =
         data.images?.[0]?.formats?.large?.url ||
         data.images?.[0]?.url ||
@@ -25,11 +29,11 @@ export const ProductCard = async ({ productId }: ProductCardProps) => {
         <div className={styles.card}>
             <div className={styles.main}>
                 <Image
-                src={imageUrl}
-                alt={data.title}
-                width={600}
-                height={600}
-                className={styles.image}
+                    src={imageUrl}
+                    alt={data.title}
+                    width={600}
+                    height={600}
+                    className={styles.image}
                 />
                 <div className={styles.content}>
                     <div className={styles.title}>{data.title}</div>
@@ -42,11 +46,8 @@ export const ProductCard = async ({ productId }: ProductCardProps) => {
                 </div>
             </div>
 
-            {data.productCategory && (
-                <RelatedProducts
-                    categoryId={data.productCategory.id}
-                    excludeDocumentId={data.documentId}
-                />
+            {relatedProducts && (
+                <RelatedProducts products={relatedProducts.items} />
             )}
         </div>
     );
