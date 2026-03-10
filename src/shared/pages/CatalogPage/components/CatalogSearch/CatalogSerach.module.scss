@@ -1,0 +1,11 @@
+@use 'styles/mixins';
+@use 'styles/variables';
+
+.root {
+    margin-top: 50px;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:variables.$space-m;
+}
