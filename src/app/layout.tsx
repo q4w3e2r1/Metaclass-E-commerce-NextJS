@@ -1,16 +1,23 @@
+import { Roboto } from 'next/font/google';
 import '@/shared/styles/globals.scss';
 import { Providers } from './providers';
 import Header from '@pages/Header';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+
+const roboto = Roboto({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '700'],
+  variable: '--font-roboto',
+});
 
 export const metadata: Metadata = {
   title: 'Lalasia',
-  description: 'Магазин товаров для дома на каждый день',
+  description: 'Магазин мебели и товаров для дома',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru">
+    <html lang="ru" className={roboto.variable}>
       <body>
         <Providers>
           <Header />
