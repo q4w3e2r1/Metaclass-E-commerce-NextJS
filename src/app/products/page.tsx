@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { HydrationBoundary } from '@tanstack/react-query';
 import CatalogPage from '@pages/CatalogPage';
@@ -21,7 +22,9 @@ export default async function ProductsPage() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <CatalogPage />
+      <Suspense fallback={null}>
+        <CatalogPage />
+      </Suspense>
     </HydrationBoundary>
   );
 }
