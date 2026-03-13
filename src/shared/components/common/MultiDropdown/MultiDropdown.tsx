@@ -43,13 +43,14 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     onCloseRef.current = onClose;
   }, [onClose]);
 
+  const close = React.useCallback(() => {
+    setIsOpen(false);
+    setSearch('');
+    onCloseRef.current?.();
+  }, []);
+
   const isOptionSelected = (option: Option): boolean =>
     value.some((selected) => selected.key === option.key);
-
-  const handleToggleDropdown = () => {
-    if (disabled) return;
-    setIsOpen(true);
-  };
 
   const handleOptionClick = (option: Option) => {
     const selected = isOptionSelected(option);
@@ -61,26 +62,6 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     }
     setSearch('');
   };
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      containerRef.current &&
-      !containerRef.current.contains(event.target as Node)
-    ) {
-      setIsOpen(false);
-      setSearch('');
-      onCloseRef.current?.();
-    }
-  };
-
-  React.useEffect(() => {
-    if (!isOpen) return;
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen]);
 
   const filteredOptions = options.filter((option) =>
     option.value.toLowerCase().includes(search.toLowerCase())
@@ -96,13 +77,20 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     <div
       ref={containerRef}
       className={`${styles.container} ${className}`}
-      onClick={handleToggleDropdown}
+      onBlur={(e) => {
+        if (containerRef.current?.contains(e.relatedTarget as Node)) return;
+        close();
+      }}
     >
       <Input
         value={inputValue}
         onChange={(value: string) => {
           if (!isOpen) return;
           setSearch(value);
+        }}
+        onFocus={() => {
+          if (disabled) return;
+          setIsOpen(true);
         }}
         afterSlot={<ArrowDownIcon color="secondary" />}
         disabled={disabled}
@@ -115,15 +103,19 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
             const selected = isOptionSelected(option);
 
             return (
-              <div
+              <button
                 key={option.key}
-                onClick={() => handleOptionClick(option)}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleOptionClick(option);
+                }}
                 className={`${styles.option} ${
                   selected ? styles.selected : ''
                 }`}
               >
                 {option.value}
-              </div>
+              </button>
             );
           })}
         </div>

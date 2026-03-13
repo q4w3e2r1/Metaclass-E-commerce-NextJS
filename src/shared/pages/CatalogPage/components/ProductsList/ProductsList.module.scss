@@ -9,7 +9,6 @@
     justify-content: start;
     width: 100%;
     gap: 35px;
-    contain: content;
 }
 
 .results {
@@ -45,7 +44,6 @@
     max-width: 1240px;
     justify-content: center;
     position: relative;
-    contain: layout;
 
     @include mixins.respond('md') {
         justify-content: space-around;

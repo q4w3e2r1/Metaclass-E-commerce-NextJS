@@ -23,14 +23,15 @@
   
     color: variables.$color-text-primary;
   
-    outline: none;
+    outline: 1px solid transparent;
   
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
   
-    transition: border 0.15s ease-in-out;
+    transition: outline 0.15s ease-in-out;
     font-family: var(--font-roboto), sans-serif;
+    cursor: pointer;
   }
   
   .withSlot {
@@ -38,7 +39,7 @@
   }
   
   .input:focus {
-    border: 1px solid variables.$color-brand;
+    outline: 1px solid variables.$color-brand;
   }
   
   .input:disabled {
@@ -50,4 +51,6 @@
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
+    pointer-events: none;
+    height: 24px;
   }

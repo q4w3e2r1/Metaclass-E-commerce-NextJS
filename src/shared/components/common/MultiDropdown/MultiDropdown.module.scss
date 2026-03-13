@@ -21,6 +21,8 @@
     margin-top: 4px;
     max-height: 300px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
   }
   
   .option {
@@ -31,9 +33,14 @@
     line-height: 20px;
     cursor: pointer;
     color: variables.$color-text-primary;
+
+    background: none;
+    border: none;
+    font-family: inherit;
   
     display: flex;
     align-items: center;
+
   }
   
   .option:hover {
