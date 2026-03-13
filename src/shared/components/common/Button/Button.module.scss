@@ -23,6 +23,8 @@
     flex-wrap: nowrap;
   
     transition: background 0.15s ease-in-out;
+
+    font-family: var(--font-roboto), sans-serif;
   }
   
   .button:hover:not(:disabled) {

@@ -14,7 +14,7 @@ export type MultiDropdownProps = {
   options: Option[];
   value: Option[];
   onChange: (value: Option[]) => void;
-  onClose?: () => void;  // ← добавили
+  onClose?: () => void;
   disabled?: boolean;
   getTitle: (value: Option[]) => string;
   placeholder?: string;

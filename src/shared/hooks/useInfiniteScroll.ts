@@ -69,7 +69,6 @@ export const useInfiniteScroll = ({
     return () => observer.disconnect();
   }, [hasNextPage, isFetchingNextPage, fetchNextPage, isRestoring]);
 
-  // Восстановление скролла после перезагрузки страницы
   useEffect(() => {
     if (targetPageFromUrl <= 1) return;
     if (targetPageFromUrl > totalPages) {

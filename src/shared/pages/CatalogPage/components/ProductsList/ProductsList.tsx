@@ -73,39 +73,42 @@ export const ProductsList = () => {
 
           return (
             <Fragment key={pageIndex}>
-              <div
-                data-page={pageNumber}
-                ref={observePage(pageNumber)}
-                className={styles.pageAnchor}
-                aria-hidden="true"
-              />
-
-              {page.items.map((product) => {
+              {page.items.map((product, productIndex) => {
                 const imageUrl =
                   product.images?.[0]?.formats?.small?.url ||
                   product.images?.[0]?.url ||
                   "";
 
-                const isInCart = cartProductIds.has(product.id);
-
                 return (
-                  <Link
+                  <div
                     key={product.documentId}
-                    href={routes.product.getRoute(product.documentId)}
-                    style={{ textDecoration: "none", color: "inherit" }}
+                    className={styles.cardWrapper}
                   >
-                    <Card
-                      image={imageUrl}
-                      title={product.title}
-                      subtitle={product.description}
-                      contentSlot={<span>{product.price}</span>}
-                      actionSlot={
-                        <CartButton
-                          productId={product.id}
-                        />
-                      }
-                    />
-                  </Link>
+                    {productIndex === 0 && (
+                      <div
+                        data-page={pageNumber}
+                        ref={observePage(pageNumber)}
+                        className={styles.pageAnchor}
+                        aria-hidden="true"
+                      />
+                    )}
+                    <Link
+                      href={routes.product.getRoute(product.documentId)}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <Card
+                        image={imageUrl}
+                        title={product.title}
+                        subtitle={product.description}
+                        contentSlot={<span>{product.price}</span>}
+                        actionSlot={
+                          <CartButton
+                            productId={product.id}
+                          />
+                        }
+                      />
+                    </Link>
+                  </div>
                 );
               })}
             </Fragment>
