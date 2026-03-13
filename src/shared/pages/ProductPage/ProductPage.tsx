@@ -30,10 +30,10 @@ export const ProductPage = ({ children }: ProductPageProps) => {
   return (
     <div className={styles.productPage}>
       <div className={styles.product}>
-        <div className={styles.backward} onClick={handleBack}>
+        <button className={styles.backward} onClick={handleBack}>
           <div className={styles.icon}><ArrowDownIcon /></div>
           Назад
-        </div>
+        </button>
         {children}
       </div>
     </div>

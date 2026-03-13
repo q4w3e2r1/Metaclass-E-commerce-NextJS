@@ -52,6 +52,9 @@ type GetInfiniteProductsParams = {
   pageSize: number;
   categories?: string[];
   search?: string;
+  sort?:string;
+  priceFrom?: string;
+  priceTo?: string;
 };
 
 export const getProductsInfinite = async ({
@@ -59,6 +62,9 @@ export const getProductsInfinite = async ({
   pageSize,
   categories,
   search,
+  sort,
+  priceFrom,
+  priceTo,
 }: GetInfiniteProductsParams): Promise<InfiniteProductsResponse> => {
 
   const filters: Record<string, unknown> = {};
@@ -77,6 +83,13 @@ export const getProductsInfinite = async ({
     };
   }
 
+  if (priceFrom || priceTo) {
+    filters.price = {
+      ...(priceFrom && { $gte: Number(priceFrom) }),
+      ...(priceTo && { $lte: Number(priceTo) }),
+    };
+  }
+
   const query = buildQuery({
     populate: ["images", "productCategory"],
     pagination: {
@@ -85,6 +98,7 @@ export const getProductsInfinite = async ({
       withCount: true,
     },
     ...(Object.keys(filters).length > 0 && { filters }),
+    ...(sort && { sort }),
   });
 
   const { data } = await api.get<StrapiResponse<Product>>(

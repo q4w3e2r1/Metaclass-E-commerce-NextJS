@@ -20,6 +20,10 @@ export const ProductsList = () => {
   const categoryIds = useMemo(() => {
     return searchParams.get("categories")?.split(",").filter(Boolean) ?? [];
   }, [searchParams]);
+  const sort = searchParams.get("sort") ?? undefined;
+  const priceFrom = searchParams.get("priceFrom") ?? undefined;
+  const priceTo = searchParams.get("priceTo") ?? undefined;
+
 
   const {
     data,
@@ -27,7 +31,7 @@ export const ProductsList = () => {
     hasNextPage,
     isFetchingNextPage,
     isLoading,
-  } = useInfiniteProducts(categoryIds, search);
+  } = useInfiniteProducts(categoryIds, search, 1, sort, priceFrom, priceTo);
 
   const totalPages = data?.pages.length ?? 0;
 

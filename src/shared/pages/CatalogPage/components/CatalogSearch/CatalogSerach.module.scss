@@ -6,6 +6,11 @@
     width:100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap:variables.$space-m;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: variables.$space-m;
 }
