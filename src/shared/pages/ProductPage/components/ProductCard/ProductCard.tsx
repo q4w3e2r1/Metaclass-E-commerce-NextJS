@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import { getProductById, getRelatedProductsByCategory } from '@api/products';
+import { getProductById, getRelatedProductsByCategory } from '@api/products.server';
 import { notFound } from 'next/navigation';
 import { Button, CartButton } from '@components';
 import styles from './ProductCard.module.scss';
@@ -15,11 +14,9 @@ export const ProductCard = async ({ productId }: ProductCardProps) => {
 
     if (!data) notFound();
 
-    const [relatedProducts] = await Promise.all([
-        data.productCategory
-            ? getRelatedProductsByCategory(data.productCategory.id, data.documentId).catch(() => null)
-            : Promise.resolve(null),
-    ]);
+    const relatedProducts = data.productCategory
+        ? await getRelatedProductsByCategory(data.productCategory.id, data.documentId).catch(() => null)
+        : null;
 
     const images = (data.images ?? [])
         .map((img) => img.formats?.large?.url || img.url)

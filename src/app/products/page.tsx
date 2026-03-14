@@ -2,7 +2,15 @@ import { Suspense } from 'react';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { HydrationBoundary } from '@tanstack/react-query';
 import CatalogPage from '@pages/CatalogPage';
-import { getProductsInfinite } from '@api/products';
+import { getProductsInfiniteServer } from '@api/products.server';
+import { Metadata } from 'next';
+
+export const revalidate = 600;
+
+export const metadata: Metadata = {
+  title: 'Products',
+  description: 'Browse our catalog of products',
+};
 
 export default async function ProductsPage() {
   const queryClient = new QueryClient({
@@ -15,8 +23,8 @@ export default async function ProductsPage() {
   });
 
   await queryClient.prefetchInfiniteQuery({
-    queryKey: ['products', 'infinite', [], ''],
-    queryFn: () => getProductsInfinite({ page: 1, pageSize: 9 }),
+    queryKey: ['products', 'infinite'],
+    queryFn: () => getProductsInfiniteServer({ page: 1, pageSize: 9 }),
     initialPageParam: 1,
   });
 

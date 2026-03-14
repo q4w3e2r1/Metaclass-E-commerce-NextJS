@@ -3,7 +3,7 @@ import CatalogHeader from './components/CatalogHeader';
 import CatalogSearch from './components/CatalogSearch';
 import ProductsList from './components/ProductsList';
 
-export const CatalogPage = () => {
+const CatalogPage = () => {
 
   return (
     <div className={styles.wrap}>
