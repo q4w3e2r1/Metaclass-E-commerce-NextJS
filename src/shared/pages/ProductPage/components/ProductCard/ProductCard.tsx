@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { Button, CartButton } from '@components';
 import styles from './ProductCard.module.scss';
 import RelatedProducts from '../RelatedProducts';
+import ImageSlider from './components';
 
 interface ProductCardProps {
   productId: string;
@@ -20,21 +21,14 @@ export const ProductCard = async ({ productId }: ProductCardProps) => {
             : Promise.resolve(null),
     ]);
 
-    const imageUrl =
-        data.images?.[0]?.formats?.large?.url ||
-        data.images?.[0]?.url ||
-        "";
+    const images = (data.images ?? [])
+        .map((img) => img.formats?.large?.url || img.url)
+        .filter(Boolean);
 
     return (
         <div className={styles.card}>
             <div className={styles.main}>
-                <Image
-                    src={imageUrl}
-                    alt={data.title}
-                    width={600}
-                    height={600}
-                    className={styles.image}
-                />
+                <ImageSlider images={images} alt={data.title} />
                 <div className={styles.content}>
                     <div className={styles.title}>{data.title}</div>
                     <div className={styles.description}>{data.description}</div>

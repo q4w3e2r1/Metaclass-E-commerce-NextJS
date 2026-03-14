@@ -11,7 +11,7 @@ export default function Error({
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <div className={styles.icon}>✦</div>
+        <div className={styles.icon}>⚠️</div>
         <h1 className={styles.title}>Что-то пошло не так</h1>
         <p className={styles.description}>
           Произошла непредвиденная ошибка. Мы уже знаем о проблеме и работаем над её устранением.

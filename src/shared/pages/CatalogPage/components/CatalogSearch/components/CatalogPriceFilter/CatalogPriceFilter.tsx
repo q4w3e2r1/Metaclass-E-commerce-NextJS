@@ -69,6 +69,7 @@ export const CatalogPriceFilter = () => {
           onChange={() => {}}
           placeholder="Price"
           afterSlot={<ArrowDownIcon color="secondary" />}
+          cursor='pointer'
           readOnly
         />
       </div>

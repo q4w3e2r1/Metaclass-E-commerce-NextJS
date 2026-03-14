@@ -95,6 +95,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
         afterSlot={<ArrowDownIcon color="secondary" />}
         disabled={disabled}
         placeholder={hasSelectedOptions ? titleText : getTitle([])}
+        cursor='pointer'
       />
 
       {isOpen && !disabled && (

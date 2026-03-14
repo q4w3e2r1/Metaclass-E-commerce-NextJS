@@ -9,11 +9,19 @@ const colorMap = {
 export type IconProps = React.SVGAttributes<SVGElement> & {
     className?: string;
     color?: 'primary' | 'secondary' | 'accent';
+    fill?: string;
 };
 
+const ArrowDownIcon: React.FC<IconProps> = ({
+    className,
+    color = 'primary',
+    fill,
+    width = 24,
+    height = 24,
+    ...props
+}) => {
+    const colorValue = fill ?? colorMap[color];
 
-const ArrowDownIcon: React.FC<IconProps> = ({className, color='primary', width = 24, height = 24, ...props}) => {
-    const colorValue = colorMap[color];
     return (
         <svg
             className={className}
@@ -23,7 +31,8 @@ const ArrowDownIcon: React.FC<IconProps> = ({className, color='primary', width =
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             style={{ display: 'inline-block' }}
-            {...props}>
+            {...props}
+        >
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
