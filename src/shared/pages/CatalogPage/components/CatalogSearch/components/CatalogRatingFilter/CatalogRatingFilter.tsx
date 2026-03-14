@@ -1,24 +1,26 @@
 'use client';
-import { MultiDropdown } from '@components';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
+import { MultiDropdown } from '@components';
 
 type Option = { key: string; value: string };
 
-const SORT_OPTIONS: Option[] = [
-  { key: 'price:asc', value: 'Cheapest first ↑' },
-  { key: 'price:desc', value: 'Most expensive first ↓' },
+const RATING_OPTIONS: Option[] = [
+  { key: '1', value: '★☆☆☆☆ 1' },
+  { key: '2', value: '★★☆☆☆ 2' },
+  { key: '3', value: '★★★☆☆ 3' },
+  { key: '4', value: '★★★★☆ 4' },
+  { key: '5', value: '★★★★★ 5 only' },
 ];
 
-export const CatalogSortFilter = () => {
+export const CatalogRatingFilter = () => {
   const [pending, setPending] = useState<Option[] | null>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const selected = useMemo(() => {
-    const sort = searchParams.get('sort');
-    return SORT_OPTIONS.filter((o) => o.key === sort);
-  }, [searchParams]);
+  const selected = RATING_OPTIONS.filter(
+    (o) => o.key === searchParams.get('rating')
+  );
 
   const displayed = pending ?? selected;
 
@@ -35,9 +37,9 @@ export const CatalogSortFilter = () => {
     if (pending === null) return;
     const params = new URLSearchParams(searchParams.toString());
     if (!pending.length) {
-      params.delete('sort');
+      params.delete('rating');
     } else {
-      params.set('sort', pending[pending.length - 1].key);
+      params.set('rating', pending[0].key);
     }
     params.delete('page');
     router.push(`?${params.toString()}`, { scroll: false });
@@ -46,13 +48,13 @@ export const CatalogSortFilter = () => {
 
   return (
     <MultiDropdown
-      options={SORT_OPTIONS}
+      options={RATING_OPTIONS}
       value={displayed}
       onChange={handleChange}
       onClose={handleClose}
-      getTitle={(v) => v.length ? v[v.length - 1].value : 'Sort by price'}
+      getTitle={(v) => v.length ? v[0].value : 'Rating'}
     />
   );
 };
 
-export default CatalogSortFilter;
+export default CatalogRatingFilter;

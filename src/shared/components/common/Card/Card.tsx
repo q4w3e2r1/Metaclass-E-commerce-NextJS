@@ -1,6 +1,7 @@
 import React from 'react';
 import Text from '../Text';
 import styles from './Card.module.scss';
+import Image from 'next/image';
 
 export type CardProps = {
   className?: string;
@@ -28,11 +29,14 @@ const Card: React.FC<CardProps> = ({
       className={`${styles.card} ${className}`}
       onClick={onClick}
     >
-      <img
-        src={image}
-        alt={`Картинка карточки ${title}`}
-        className={styles.image}
-      />
+      <div className={styles.imageWrapper}>
+        <Image
+          src={image}
+          alt={`Картинка карточки ${title}`}
+          fill
+          className={styles.image}
+        />
+      </div>
       <div className={styles.contentCard}>
         <div className={styles.contentText}>
           {captionSlot && (

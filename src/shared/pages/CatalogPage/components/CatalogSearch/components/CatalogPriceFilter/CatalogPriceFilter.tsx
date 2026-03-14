@@ -31,11 +31,15 @@ export const CatalogPriceFilter = () => {
     if (from) params.set('priceFrom', from); else params.delete('priceFrom');
     if (to) params.set('priceTo', to); else params.delete('priceTo');
     params.delete('page');
-    router.push(`?${params.toString()}`);
+    router.push(`?${params.toString()}`, { scroll: false });
   };
 
   const handlePreset = (preset: number) => {
-    setPriceTo(String(preset));
+    if (priceTo === String(preset)) {
+      setPriceTo('');
+    } else {
+      setPriceTo(String(preset));
+    }
   };
 
   const close = () => {
@@ -62,13 +66,31 @@ export const CatalogPriceFilter = () => {
     >
       <div
         className={`${styles.trigger} ${isOpen ? styles.triggerOpen : ''}`}
-        onClick={() => isOpen ? close() : handleOpen()}
       >
         <Input
           value={isOpen ? '' : getTitle()}
           onChange={() => {}}
           placeholder="Price"
-          afterSlot={<ArrowDownIcon color="secondary" />}
+          onFocus={() => {
+            if (!isOpen) handleOpen();
+          }}
+          afterSlot={
+            <ArrowDownIcon 
+              color="secondary" 
+              style={{
+                transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                transition: 'transform 0.2s ease',
+                }} 
+              onMouseDown={(e) => {
+                e.preventDefault();
+                if (isOpen) {
+                  containerRef.current?.querySelector('input')?.blur();
+                  close();
+                } else {
+                  containerRef.current?.querySelector('input')?.focus();
+                }
+              }}
+            />}
           cursor='pointer'
           readOnly
         />

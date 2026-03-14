@@ -72,3 +72,31 @@
     flex-shrink: 0;
     contain: strict;
 }
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: variables.$space-m;
+    padding: 80px 20px;
+    width: 100%;
+}
+
+.emptyIcon {
+    font-size: 64px;
+    line-height: 1;
+}
+
+.emptyTitle {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    color: variables.$color-text-primary;
+}
+
+.emptySubtitle {
+    font-size: 16px;
+    line-height: 20px;
+    color: #AFADB5;
+}

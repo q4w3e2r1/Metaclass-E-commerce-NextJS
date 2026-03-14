@@ -92,7 +92,24 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
           if (disabled) return;
           setIsOpen(true);
         }}
-        afterSlot={<ArrowDownIcon color="secondary" />}
+        afterSlot={
+          <ArrowDownIcon 
+            color="secondary" 
+            style={{
+              transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+              transition: 'transform 0.2s ease',
+              }} 
+            onMouseDown={(e) => {
+              e.preventDefault(); // не даём инпуту потерять/получить фокус
+              if (isOpen) {
+                containerRef.current?.querySelector('input')?.blur();
+                close();
+              } else {
+                // фокусируем инпут программно чтобы открыть дроп
+                containerRef.current?.querySelector('input')?.focus();
+              }
+            }}
+          />}
         disabled={disabled}
         placeholder={hasSelectedOptions ? titleText : getTitle([])}
         cursor='pointer'

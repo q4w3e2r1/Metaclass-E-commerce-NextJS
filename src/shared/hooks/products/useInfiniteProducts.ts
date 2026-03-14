@@ -3,9 +3,9 @@ import { getProductsInfinite } from "../../api/products";
 
 const PAGE_SIZE = 9;
 
-export const useInfiniteProducts = (categories: string[], search?: string, initialPage=1, sort?:string, priceFrom?: string, priceTo?: string,) => {
+export const useInfiniteProducts = (categories: string[], search?: string, initialPage=1, sort?:string, priceFrom?: string, priceTo?: string, rating?:string, inStock?:boolean) => {
   return useInfiniteQuery({
-    queryKey: ["products", "infinite", categories, search, sort, priceFrom, priceTo],
+    queryKey: ["products", "infinite", categories, search, sort, priceFrom, priceTo, rating, inStock],
     queryFn: ({ pageParam = 1 }) =>
       getProductsInfinite({
         page: pageParam,
@@ -15,6 +15,8 @@ export const useInfiniteProducts = (categories: string[], search?: string, initi
         sort,
         priceFrom,
         priceTo,
+        rating,
+        inStock
       }),
     initialPageParam: initialPage,
     staleTime: 1000 * 60 * 5,

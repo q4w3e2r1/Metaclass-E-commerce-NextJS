@@ -66,7 +66,7 @@ export const CatalogCategoryFilter = () => {
         }
 
         params.delete("page");
-        router.push(`?${params.toString()}`);
+        router.push(`?${params.toString()}`, { scroll: false });
         setPendingCategories(null);
     };
 

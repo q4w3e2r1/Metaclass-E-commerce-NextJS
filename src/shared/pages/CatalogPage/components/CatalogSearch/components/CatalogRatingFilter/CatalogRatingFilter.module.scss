@@ -1,0 +1,40 @@
+// CatalogRatingFilter.module.scss
+@use 'styles/variables';
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: variables.$space-xxs;
+    height: 52px;
+}
+
+.stars {
+    display: flex;
+    flex-direction: row;
+}
+
+.star {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    font-size: 28px;
+    line-height: 1;
+    color: #AFADB5;
+    transition: color 0.1s ease-in-out;
+    font-family: inherit;
+
+    &:hover {
+        color: #FFC107;
+    }
+}
+
+.starActive {
+    color: #FFC107;
+}
+
+.label {
+    font-size: 14px;
+    color: #AFADB5;
+    white-space: nowrap;
+}

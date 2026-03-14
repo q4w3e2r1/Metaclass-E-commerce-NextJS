@@ -55,9 +55,11 @@ type GetInfiniteProductsParams = {
   sort?:string;
   priceFrom?: string;
   priceTo?: string;
+  rating?:string;
+  inStock?:boolean
 };
 
-export const getProductsInfinite = async ({
+export const  getProductsInfinite = async ({
   page,
   pageSize,
   categories,
@@ -65,6 +67,8 @@ export const getProductsInfinite = async ({
   sort,
   priceFrom,
   priceTo,
+  rating,
+  inStock,
 }: GetInfiniteProductsParams): Promise<InfiniteProductsResponse> => {
 
   const filters: Record<string, unknown> = {};
@@ -90,6 +94,20 @@ export const getProductsInfinite = async ({
     };
   }
 
+  if (rating) {
+    filters.rating = {
+      $gte: Number(rating),
+    };
+  }
+
+  if (inStock) {
+    filters.isInStock = {
+      $eq: true,
+    };
+  }
+
+  const resolvedSort = sort ?? (rating ? 'rating:asc' : undefined);
+
   const query = buildQuery({
     populate: ["images", "productCategory"],
     pagination: {
@@ -98,7 +116,7 @@ export const getProductsInfinite = async ({
       withCount: true,
     },
     ...(Object.keys(filters).length > 0 && { filters }),
-    ...(sort && { sort }),
+    ...(resolvedSort && { sort: resolvedSort }),
   });
 
   const { data } = await api.get<StrapiResponse<Product>>(

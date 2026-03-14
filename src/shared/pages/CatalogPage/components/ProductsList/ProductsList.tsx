@@ -23,7 +23,8 @@ export const ProductsList = () => {
   const sort = searchParams.get("sort") ?? undefined;
   const priceFrom = searchParams.get("priceFrom") ?? undefined;
   const priceTo = searchParams.get("priceTo") ?? undefined;
-
+  const rating = searchParams.get("rating") ?? undefined;
+  const inStock = searchParams.get("inStock") === "true" || undefined;
 
   const {
     data,
@@ -31,7 +32,7 @@ export const ProductsList = () => {
     hasNextPage,
     isFetchingNextPage,
     isLoading,
-  } = useInfiniteProducts(categoryIds, search, 1, sort, priceFrom, priceTo);
+  } = useInfiniteProducts(categoryIds, search, 1, sort, priceFrom, priceTo, rating, inStock);
 
   const totalPages = data?.pages.length ?? 0;
 
@@ -59,6 +60,18 @@ export const ProductsList = () => {
           {SKELETON_ITEMS.map((i) => (
             <ProductCardSkeleton key={i} />
           ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (!isLoading && total === 0) {
+    return (
+      <div className={styles.list}>
+        <div className={styles.empty}>
+          <div className={styles.emptyIcon}>🔍</div>
+          <div className={styles.emptyTitle}>No products found</div>
+          <div className={styles.emptySubtitle}>Try changing your search or filters</div>
         </div>
       </div>
     );
