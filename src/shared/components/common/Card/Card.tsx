@@ -12,6 +12,7 @@ export type CardProps = {
   contentSlot?: React.ReactNode;
   onClick?: React.MouseEventHandler;
   actionSlot?: React.ReactNode;
+  priority?: boolean;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -23,6 +24,7 @@ const Card: React.FC<CardProps> = ({
   contentSlot,
   onClick,
   actionSlot,
+  priority = false,
 }) => {
   return (
     <div
@@ -34,7 +36,9 @@ const Card: React.FC<CardProps> = ({
           src={image}
           alt={`Картинка карточки ${title}`}
           fill
+          sizes='auto'
           className={styles.image}
+          priority={priority}
         />
       </div>
       <div className={styles.contentCard}>

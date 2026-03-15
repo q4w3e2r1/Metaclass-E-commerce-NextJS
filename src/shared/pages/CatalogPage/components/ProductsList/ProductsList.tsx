@@ -116,6 +116,7 @@ export const ProductsList = () => {
                       <Card
                         image={imageUrl}
                         title={product.title}
+                        priority={productIndex === 0 && pageIndex === 0}
                         subtitle={product.description}
                         contentSlot={<span>{product.price}</span>}
                         actionSlot={

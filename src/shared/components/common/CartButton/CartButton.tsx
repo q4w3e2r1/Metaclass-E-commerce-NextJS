@@ -2,6 +2,9 @@
 import { Button } from '@components';
 import { useCart } from '@hooks/cart/useCartQuery';
 import { useState, useEffect, useRef, useMemo } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
+import { getToken } from '@api/auth/store';
+import { routes } from '@config/routes';
 import type { ReactNode } from 'react';
 
 interface CartButtonProps {
@@ -17,6 +20,8 @@ export const CartButton = ({
 }: CartButtonProps) => {
   const { cart, addToCart, removeFromCart } = useCart();
   const [showLoading, setShowLoading] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
   
   const isInCart = useMemo(() => {
     return cart?.some(item => item.product.id === productId) ?? false;
@@ -35,6 +40,12 @@ export const CartButton = ({
     e.stopPropagation();
     e.preventDefault();
 
+    const token = getToken();
+    if (!token) {
+      router.push(`${routes.auth.getRoute()}?redirect=${pathname}`);
+      return;
+    }
+
     setShowLoading(true);
     
     try {
@@ -43,7 +54,7 @@ export const CartButton = ({
       } else {
         await addToCart(productId);
       }
-    } catch (error) {
+    } catch {
       setShowLoading(false);
     }
   };

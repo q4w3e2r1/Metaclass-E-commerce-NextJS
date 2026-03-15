@@ -47,6 +47,7 @@ const CategoryCard = ({ category, products, total }: CategoryCardProps) => {
                 alt={`${category.title} ${i + 1}`}
                 fill
                 className={styles.image}
+                sizes="(max-width: 768px) 100vw, (max-width: 1240px) 50vw, 360px"
               />
             ) : (
               <div className={styles.placeholder} />

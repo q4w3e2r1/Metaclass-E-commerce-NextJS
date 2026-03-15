@@ -15,4 +15,8 @@ export const routes = {
       mask: "/products/:productId",
       getRoute: (id: string | number) => `/products/${id}`,
     },
+    auth: {
+      mask: "/login",
+      getRoute: () => "/login",
+    },
   };

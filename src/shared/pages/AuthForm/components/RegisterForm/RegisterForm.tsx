@@ -1,9 +1,12 @@
-// RegisterForm.tsx
 'use client';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useRouter } from 'next/navigation';
 import { Input, Button } from '@components';
+import { register } from '@api/auth/auth';
+import { saveToken } from '@api/auth/store';
+import { routes } from '@config/routes';
 import styles from './RegisterForm.module.scss';
 
 const registerSchema = z.object({
@@ -23,9 +26,12 @@ type RegisterFormProps = {
 };
 
 export const RegisterForm = ({ onSwitch }: RegisterFormProps) => {
+  const router = useRouter();
+
   const {
     control,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<RegisterData>({
     resolver: zodResolver(registerSchema),
@@ -33,7 +39,19 @@ export const RegisterForm = ({ onSwitch }: RegisterFormProps) => {
   });
 
   const onSubmit = async (data: RegisterData) => {
-    console.log(data);
+    try {
+      const res = await register({
+        username: data.name,
+        email: data.email,
+        password: data.password,
+      });
+      saveToken(res.jwt);
+      const params = new URLSearchParams(window.location.search);
+      const redirect = params.get('redirect');
+      router.push(redirect ?? routes.products.getRoute());
+    } catch {
+      setError('email', { message: 'Email already taken or invalid' });
+    }
   };
 
   return (
@@ -127,4 +145,4 @@ export const RegisterForm = ({ onSwitch }: RegisterFormProps) => {
   );
 };
 
-export default RegisterForm
+export default RegisterForm;

@@ -2,7 +2,11 @@
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useRouter } from 'next/navigation';
 import { Input, Button } from '@components';
+import { login } from '@api/auth/auth';
+import { saveToken } from '@api/auth/store';
+import { routes } from '@config/routes';
 import styles from './LoginForm.module.scss';
 
 const loginSchema = z.object({
@@ -17,9 +21,12 @@ type LoginFormProps = {
 };
 
 export const LoginForm = ({ onSwitch }: LoginFormProps) => {
+  const router = useRouter();
+
   const {
     control,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<LoginData>({
     resolver: zodResolver(loginSchema),
@@ -27,7 +34,18 @@ export const LoginForm = ({ onSwitch }: LoginFormProps) => {
   });
 
   const onSubmit = async (data: LoginData) => {
-    console.log(data);
+    try {
+      const res = await login({
+        identifier: data.email,
+        password: data.password,
+      });
+      saveToken(res.jwt);
+      const params = new URLSearchParams(window.location.search);
+      const redirect = params.get('redirect');
+      router.push(redirect ?? routes.products.getRoute());
+    } catch {
+      setError('password', { message: 'Invalid email or password' });
+    }
   };
 
   return (
@@ -86,4 +104,4 @@ export const LoginForm = ({ onSwitch }: LoginFormProps) => {
   );
 };
 
-export default LoginForm
+export default LoginForm;
