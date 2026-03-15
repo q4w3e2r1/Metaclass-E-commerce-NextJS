@@ -5,7 +5,11 @@ export const routes = {
     },
     products: {
       mask: "/products/",
-      getRoute: () => "/products/",
+      getRoute: () => "/products",
+    },
+    categories: {
+      mask: "/categories/",
+      getRoute: () => "/categories",
     },
     product: {
       mask: "/products/:productId",

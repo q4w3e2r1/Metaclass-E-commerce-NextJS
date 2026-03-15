@@ -9,6 +9,7 @@
     justify-content: start;
     width: 100%;
     gap: 35px;
+    padding-bottom: 25px;
 }
 
 .results {
@@ -32,10 +33,8 @@
     font-weight: 700;
     font-style: bold;
     font-size: 28px;
-    line-height: 36px;
+    line-height: 20px;
     color: variables.$color-brand;
-    display: flex;
-    align-items: center;
 }
 
 .listCards {
@@ -48,31 +47,8 @@
     position: relative;
 
     @include mixins.respond('md') {
-        justify-content: space-around;
+        justify-content: space-between;
     }
-}
-
-.cardWrapper {
-    position: relative;
-}
-
-.pageAnchor {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.loader {
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    contain: strict;
 }
 
 .empty {

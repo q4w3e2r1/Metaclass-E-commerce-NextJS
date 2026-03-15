@@ -12,5 +12,9 @@
 .text {
     font-size: 16px;
     line-height: 20px;
-    color: variables.$color-text-primary;
+    color: #8b8888;
+}
+
+.active {
+    color:variables.$color-text-primary
 }

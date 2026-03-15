@@ -26,7 +26,7 @@ export const CatalogStockFilter = () => {
         checked={isInStock}
         onChange={handleChange}
       />
-      <span className={styles.text}>In stock</span>
+      <span className={`${styles.text} ${isInStock ? styles.active : ""}`}>Only in stock</span>
     </label>
   );
 };
