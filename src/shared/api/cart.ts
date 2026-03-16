@@ -14,10 +14,10 @@ export const getCart = async () => {
     return data;
   };
   
-  export const removeFromCart = async (productId: number) => {
-    const { data } = await api.post("/cart/remove", {
-      product: productId,
-      quantity: 1,
-    });
-    return data;
-  };
+export const removeFromCart = async (productId: number, quantity = 1) => {
+  const { data } = await api.post("/cart/remove", {
+    product: productId,
+    quantity,
+  });
+  return data;
+};

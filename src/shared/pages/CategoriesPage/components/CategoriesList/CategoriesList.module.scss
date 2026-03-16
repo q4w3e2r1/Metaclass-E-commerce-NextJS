@@ -46,7 +46,7 @@
     justify-content: center;
     position: relative;
 
-    @include mixins.respond('md') {
+    @include mixins.respond('xl') {
         justify-content: space-between;
     }
 }

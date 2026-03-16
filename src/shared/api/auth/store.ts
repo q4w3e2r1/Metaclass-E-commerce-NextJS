@@ -1,7 +1,7 @@
 const TOKEN_KEY = 'jwt_token';
 const TOKEN_EXPIRY_KEY = 'jwt_token_expiry';
-//const TOKEN_TTL = 1000 * 60 * 60 * 24;
-const TOKEN_TTL = 1000 * 60;
+const TOKEN_TTL = 1000 * 60 * 60 * 24;
+//const TOKEN_TTL = 1000 * 60;
 
 export const saveToken = (token: string) => {
   localStorage.setItem(TOKEN_KEY, token);
