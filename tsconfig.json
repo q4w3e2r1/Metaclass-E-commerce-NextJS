@@ -24,12 +24,9 @@
       "@components": ["shared/components/common/index.ts"],
       "@components/*": ["shared/components/common/*"],
       "@pages/*": ["shared/pages/*"],
-      "config": ["shared/config/index"],
       "@config/*": ["shared/config/*"],
       "styles": ["shared/styles/index"],
       "styles/*": ["shared/styles/*"],
-      "utils": ["shared/utils/index"],
-      "utils/*": ["shared/utils/*"],
       "@hooks/*": ["shared/hooks/*"],
       "@app-types/*": ["shared/types/*"],
       "@api/*": ["shared/api/*"]

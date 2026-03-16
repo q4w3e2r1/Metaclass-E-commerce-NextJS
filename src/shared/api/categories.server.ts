@@ -1,9 +1,6 @@
 import type {
-  InfiniteProductsResponse,
   Product,
-  RelatedProductsResponse,
   StrapiResponse,
-  StrapiSingleResponse,
 } from '@app-types/product';
 
 import { buildQuery } from './queryBuilder';

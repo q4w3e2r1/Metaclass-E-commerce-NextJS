@@ -97,12 +97,11 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
               transition: 'transform 0.2s ease',
             }}
             onMouseDown={(e) => {
-              e.preventDefault(); // не даём инпуту потерять/получить фокус
+              e.preventDefault();
               if (isOpen) {
                 containerRef.current?.querySelector('input')?.blur();
                 close();
               } else {
-                // фокусируем инпут программно чтобы открыть дроп
                 containerRef.current?.querySelector('input')?.focus();
               }
             }}
