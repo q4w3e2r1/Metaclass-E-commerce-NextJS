@@ -3,17 +3,30 @@ import { routes } from '@config/routes';
 import CartModal from '@pages/CartModal';
 
 import { useState } from 'react';
+import { getToken } from '@/shared/api/auth/store';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import styles from './Header.module.scss';
+import { useCart } from '@/shared/hooks/cart/useCartQuery';
 
 export const Header = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const { cart } = useCart();
+  const cartCount = cart?.reduce((sum, item) => sum + item.quantity, 0) ?? 0;
 
+  const handleCartClick = () => {
+    const token = getToken();
+    if (!token) {
+      router.push(`${routes.auth.getRoute()}?redirect=${pathname}`);
+      return;
+    }
+    setIsCartOpen(true);
+  };
   return (
     <>
       <header className={styles.header}>
@@ -47,10 +60,17 @@ export const Header = () => {
             <button
               type="button"
               className={styles.iconBtn}
-              onClick={() => setIsCartOpen(true)}
+              onClick={handleCartClick}
             >
-              <div className={styles.icon}>
-                <Image src="/bag-2.svg" alt="cart" fill />
+              <div className={styles.cartIconWrapper}>
+                <div className={styles.icon}>
+                  <Image src="/bag-2.svg" alt="cart" fill />
+                </div>
+                {cartCount > 0 && (
+                  <span className={styles.badge}>
+                    {cartCount > 99 ? '99+' : cartCount}
+                  </span>
+                )}
               </div>
             </button>
             <div className={styles.icon}>
