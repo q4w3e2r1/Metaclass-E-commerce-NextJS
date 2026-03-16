@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './Loader.module.scss';
 
 export type LoaderProps = {
@@ -8,16 +9,10 @@ export type LoaderProps = {
 
 const Loader: React.FC<LoaderProps> = ({ size = 'l', className }) => {
   const sizeClass =
-    size === 'l'
-      ? styles.sizeL
-      : size === 's'
-      ? styles.sizeS
-      : styles.sizeM;
+    size === 'l' ? styles.sizeL : size === 's' ? styles.sizeS : styles.sizeM;
 
   const colorClass =
-    className === 'ChangeColor'
-      ? styles.changeColor
-      : styles.defaultColor;
+    className === 'ChangeColor' ? styles.changeColor : styles.defaultColor;
 
   return (
     <svg

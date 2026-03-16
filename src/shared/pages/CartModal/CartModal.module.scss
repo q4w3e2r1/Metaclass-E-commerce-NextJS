@@ -1,0 +1,157 @@
+@use 'styles/variables';
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal {
+  width: 100%;
+  max-width: 480px;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: variables.$space-m variables.$space-xs;
+  border-bottom: 1px solid #f3f3f3;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #afadb5;
+  padding: 4px;
+  transition: color 0.15s ease-in-out;
+
+  &:hover {
+    color: variables.$color-text-primary;
+  }
+}
+
+.selectAll {
+  display: flex;
+  align-items: center;
+  gap: variables.$space-xxs;
+  padding: variables.$space-xs;
+  border-bottom: 1px solid #f3f3f3;
+  flex-shrink: 0;
+}
+
+.selectAllText {
+  font-size: 14px;
+  color: variables.$color-text-primary;
+}
+
+.removeSelectedBtn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-family: inherit;
+  color: #e53935;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.15s ease-in-out;
+
+  &:disabled {
+    color: #afadb5;
+    cursor: not-allowed;
+  }
+}
+
+.removeSelectedBtn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-family: inherit;
+  color: #e53935;
+  cursor: pointer;
+  padding: 0;
+}
+
+.items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 variables.$space-xs;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: variables.$space-m;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 64px;
+}
+
+.emptyTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: variables.$color-text-primary;
+}
+
+.emptySubtitle {
+  font-size: 14px;
+  color: #afadb5;
+}
+
+.footer {
+  padding: variables.$space-m variables.$space-xs;
+  border-top: 1px solid #f3f3f3;
+  display: flex;
+  flex-direction: column;
+  gap: variables.$space-m;
+  flex-shrink: 0;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.totalLabel {
+  font-size: 16px;
+  color: #afadb5;
+}
+
+.totalValue {
+  font-size: 24px;
+  font-weight: 700;
+  color: variables.$color-text-primary;
+}

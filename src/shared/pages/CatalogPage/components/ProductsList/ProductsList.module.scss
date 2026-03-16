@@ -2,78 +2,103 @@
 @use 'styles/mixins';
 
 .list {
-    margin-top: variables.$space-xl;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    width: 100%;
-    gap: 35px;
-    contain: content;
+  margin-top: variables.$space-xl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  gap: 35px;
 }
 
 .results {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    gap: variables.$space-m;
-    flex-shrink: 0;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  gap: variables.$space-m;
+  flex-shrink: 0;
 }
 
 .total {
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 36px;
-    font-style: bold;
-    text-wrap: nowrap;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 36px;
+  font-style: bold;
+  text-wrap: nowrap;
 }
 
 .amount {
-    font-weight: 700;
-    font-style: bold;
-    font-size: 20px;
-    line-height: 20px;
-    color: variables.$color-brand;
+  font-weight: 700;
+  font-style: bold;
+  font-size: 28px;
+  line-height: 36px;
+  color: variables.$color-brand;
+  display: flex;
+  align-items: center;
 }
 
 .listCards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
-    gap: 30px 79px;
-    width: 100%;
-    max-width: 1240px;
-    justify-content: center;
-    position: relative;
-    contain: layout;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  gap: 30px 79px;
+  width: 100%;
+  max-width: 1240px;
+  justify-content: center;
+  position: relative;
 
-    @include mixins.respond('md'){  
-        justify-content: space-around;
-    }
+  @include mixins.respond('md') {
+    justify-content: space-around;
+  }
+}
+
+.cardWrapper {
+  position: relative;
 }
 
 .pageAnchor {
-    height: 1px;
-    width: 100%;
-    grid-column: 1 / -1;
-    opacity: 0;
-    pointer-events: none;
-    margin: 0;
-    padding: 0;
-    min-height: 1px;
-    max-height: 1px;
-    content-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .loader {
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    contain: strict;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  contain: strict;
 }
 
-.pageWrapper {
-    display: contents;
-  }
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: variables.$space-m;
+  padding: 80px 20px;
+  width: 100%;
+}
+
+.emptyIcon {
+  font-size: 64px;
+  line-height: 1;
+}
+
+.emptyTitle {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  color: variables.$color-text-primary;
+}
+
+.emptySubtitle {
+  font-size: 16px;
+  line-height: 20px;
+  color: #afadb5;
+}

@@ -1,5 +1,6 @@
-"use client";
+'use client';
 import React from 'react';
+
 import styles from './Input.module.scss';
 
 export type InputProps = Omit<
@@ -9,10 +10,22 @@ export type InputProps = Omit<
   value: string;
   onChange: (value: string) => void;
   afterSlot?: React.ReactNode;
+  cursor?: 'pointer' | 'text' | 'default';
 };
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ value, onChange, afterSlot, disabled, className = '', ...props }, ref) => {
+  (
+    {
+      value,
+      onChange,
+      afterSlot,
+      disabled,
+      className = '',
+      cursor = 'text',
+      ...props
+    },
+    ref
+  ) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       onChange(event.target.value);
     };
@@ -25,16 +38,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           value={value}
           onChange={handleChange}
           disabled={disabled}
-          className={`${styles.input} ${
-            afterSlot ? styles.withSlot : ''
-          }`}
+          className={`${styles.input} ${afterSlot ? styles.withSlot : ''}`}
+          style={{ cursor }}
           {...props}
         />
-        {afterSlot && (
-          <div className={styles.afterSlot}>
-            {afterSlot}
-          </div>
-        )}
+        {afterSlot && <div className={styles.afterSlot}>{afterSlot}</div>}
       </div>
     );
   }

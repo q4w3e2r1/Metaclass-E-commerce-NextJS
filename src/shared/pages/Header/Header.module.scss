@@ -1,121 +1,170 @@
 @use 'styles/variables';
 @use 'styles/mixins';
 
-
 .header {
-    border-bottom: 2px solid #F3F3F3;
-    background-color: #ffffff;
-    padding: 0 20px;
-    width: 100%;
+  border-bottom: 2px solid #f3f3f3;
+  background-color: #ffffff;
+  padding: 0 20px;
+  width: 100%;
 
-    @media (max-width: 450px) {
-       padding: 0 5px;
-    }
+  @media (max-width: 450px) {
+    padding: 0 5px;
+  }
 }
-
 
 .container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    height: 90px;
-    width: 100%;
-    max-width: 1240px;
-    margin: 0 auto;
-    gap:5px;
-
+  height: 90px;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  gap: 5px;
 }
 
-.logo{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    cursor: pointer;
+.logo {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
 
-    @include mixins.respond('md'){
-        flex-direction:row;
-    }
+  @include mixins.respond('md') {
+    flex-direction: row;
+  }
 
-    img {
-        width: 100%;
-        max-width: fit-content;
-
-    }
-
-
+  img {
+    width: 100%;
+    max-width: fit-content;
+  }
 }
 
 .menu {
-    display: flex;
-    flex-direction: row;
-    list-style: none;
-    justify-content: space-between;
-    padding: 0 1px;
-    text-wrap: nowrap;
-    margin: 0 auto;
-    
-    min-width: fit-content;
-    max-width: 339px;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: space-between;
+  padding: 0 1px;
+  text-wrap: nowrap;
+  margin: 0 auto;
 
-    width: 50%;
-    gap:5px;
+  min-width: fit-content;
+  max-width: 339px;
 
-    font-size: 17px;
+  width: 50%;
+  gap: 5px;
 
-    @include mixins.respond('md'){
-        width: 35%;
-        justify-content: none;
-        gap:variables.$space-xl;
-        font-size: 18px;
+  font-size: 18px;
+
+  @include mixins.respond('md') {
+    width: 35%;
+    justify-content: none;
+    gap: variables.$space-xl;
+  }
+
+  @include mixins.respond('xl') {
+    width: 35%;
+    gap: variables.$space-xl;
+  }
+
+  @media (max-width: 550px) {
+    font-size: 16px;
+  }
+
+  li {
+    cursor: pointer;
+
+    &.active {
+      color: variables.$color-brand;
     }
 
-    @include mixins.respond('xl'){
-        width: 35%;
-        gap:variables.$space-xl;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
-
-
-
-    li {
-        cursor: pointer;
-
-        &.active {
-            color: variables.$color-brand;
-        }
-
-    }
+  }
 }
 
-.user-tools{
-    width: 77px;
-    display: flex;
-    gap: 0.5rem;
-    justify-content: right;
+.user-tools {
+  width: 77px;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+
+  img {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    transition: all 0.3s ease;
+
+    @media (max-width: 400px) {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  @include mixins.respond('md') {
+    gap: 1.5rem;
+    width: 119px;
 
     img {
-        cursor: pointer;
-        width: 30px;
-        height: 30px;
-        transition: all 0.3s ease;
-
-        @media (max-width: 400px) {
-            width: 25px;
-            height: 25px;
-        }
+      width: 30px;
+      height: 30px;
     }
+  }
+}
 
-    @include mixins.respond('md'){
-        gap: 1.5rem;
-        width: 119px;
+.logoFrame {
+  position: relative;
+  width: 45px;
+  height: 45px;
 
-        img {
-            width: 30px;
-            height: 30px;
-        }
-    }
+  @media (max-width: 450px) {
+    width: 32px;
+    height: 32px;
+  }
+}
 
+.logoText {
+  position: relative;
+  width: 80px;
+  height: 32px;
 
+  @include mixins.respond('md') {
+    width: 80px;
+    height: 32px;
+  }
+
+  @media (max-width: 450px) {
+    width: 50px;
+    height: 32px;
+  }
+}
+
+.icon {
+  position: relative;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  transition: all 0.3s ease;
+
+  @media (max-width: 400px) {
+    width: 25px;
+    height: 25px;
+  }
+
+  @include mixins.respond('md') {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.iconBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }

@@ -2,10 +2,15 @@
 @use 'styles/variables';
 
 .root {
-    margin-top: 50px;
-    width:100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap:variables.$space-m;
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: variables.$space-m;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: variables.$space-m;
 }

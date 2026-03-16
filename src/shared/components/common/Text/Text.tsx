@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './Text.module.scss';
 
 export type TextProps = {
@@ -35,7 +36,11 @@ const Text: React.FC<TextProps> = ({
 
   const style = maxLines ? { WebkitLineClamp: maxLines } : undefined;
 
-  return <Tag className={classNames} style={style}>{children}</Tag>;
+  return (
+    <Tag className={classNames} style={style}>
+      {children}
+    </Tag>
+  );
 };
 
 export default Text;

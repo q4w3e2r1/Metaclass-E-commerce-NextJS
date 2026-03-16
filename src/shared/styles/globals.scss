@@ -1,7 +1,7 @@
 @use 'variables';
 
 $line-height: 22px;
-$font-weight:400;
+$font-weight: 400;
 $screen-color: #fafafa;
 
 *,
@@ -10,26 +10,27 @@ $screen-color: #fafafa;
   box-sizing: border-box;
 }
 
-body, h1, h2, h3, p {
+body,
+h1,
+h2,
+h3,
+p {
   margin: 0;
 }
 
 :root {
-    font-family: var(--font-roboto), Roboto, sans-serif;
-    line-height: $line-height;
-    font-weight: $font-weight;
-    font-size: 16px;
-  
-    color: variables.$color-text-primary;
-    background-color: $screen-color;
+  font-family: var(--font-roboto), Roboto, sans-serif;
+  line-height: $line-height;
+  font-weight: $font-weight;
+  font-size: 16px;
 
+  color: variables.$color-text-primary;
+  background-color: $screen-color;
+}
 
-
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-    min-width: 320px;
-    min-height: 100vh;
-  }
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}

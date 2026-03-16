@@ -1,2 +1,1 @@
-
-export {default} from './CatalogHeader'
+export { default } from './CatalogHeader';

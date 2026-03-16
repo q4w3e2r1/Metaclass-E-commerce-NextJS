@@ -1,4 +1,7 @@
 import React from 'react';
+
+import Image from 'next/image';
+
 import Text from '../Text';
 import styles from './Card.module.scss';
 
@@ -11,6 +14,7 @@ export type CardProps = {
   contentSlot?: React.ReactNode;
   onClick?: React.MouseEventHandler;
   actionSlot?: React.ReactNode;
+  priority?: boolean;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -22,17 +26,20 @@ const Card: React.FC<CardProps> = ({
   contentSlot,
   onClick,
   actionSlot,
+  priority = false,
 }) => {
   return (
-    <div
-      className={`${styles.card} ${className}`}
-      onClick={onClick}
-    >
-      <img
-        src={image}
-        alt={`Картинка карточки ${title}`}
-        className={styles.image}
-      />
+    <div className={`${styles.card} ${className}`} onClick={onClick}>
+      <div className={styles.imageWrapper}>
+        <Image
+          src={image}
+          alt={`Картинка карточки ${title}`}
+          fill
+          sizes="auto"
+          className={styles.image}
+          priority={priority}
+        />
+      </div>
       <div className={styles.contentCard}>
         <div className={styles.contentText}>
           {captionSlot && (
@@ -40,10 +47,22 @@ const Card: React.FC<CardProps> = ({
               {captionSlot}
             </Text>
           )}
-          <Text color="primary" weight="medium" maxLines={2} tag="p" view="p-20">
+          <Text
+            color="primary"
+            weight="medium"
+            maxLines={2}
+            tag="p"
+            view="p-20"
+          >
             {title}
           </Text>
-          <Text color="secondary" weight="normal" maxLines={3} tag="p" view="p-16">
+          <Text
+            color="secondary"
+            weight="normal"
+            maxLines={3}
+            tag="p"
+            view="p-16"
+          >
             {subtitle}
           </Text>
         </div>
