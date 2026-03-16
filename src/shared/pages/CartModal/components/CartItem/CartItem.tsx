@@ -46,37 +46,45 @@ export const CartItem = ({
       </div>
 
       <div className={styles.content}>
-        <div className={styles.title}>{title}</div>
-        <div className={styles.price}>${price * quantity}</div>
+      <div className={styles.title}>{title}</div>
 
-        <div className={styles.actions}>
-          <button
-            type="button"
-            className={styles.removeBtn}
-            onClick={() => onRemove(id)}
-          >
-            Delete
-          </button>
-
-          <div className={styles.quantity}>
-            <button
-              type="button"
-              className={styles.quantityBtn}
-              onClick={() => onQuantityChange(id, Math.max(1, quantity - 1))}
-            >
-              −
-            </button>
-            <span className={styles.quantityValue}>{quantity}</span>
-            <button
-              type="button"
-              className={styles.quantityBtn}
-              onClick={() => onQuantityChange(id, quantity + 1)}
-            >
-              +
-            </button>
-          </div>
+      <div className={styles.priceRow}>
+        <div>
+          <div className={styles.price}>${price * quantity}</div>
+          {quantity > 1 && (
+            <div className={styles.pricePerUnit}>${price} each</div>
+          )}
         </div>
       </div>
+
+      <div className={styles.actions}>
+        <button
+          type="button"
+          className={styles.removeBtn}
+          onClick={() => onRemove(id)}
+        >
+          Delete
+        </button>
+
+        <div className={styles.quantity}>
+          <button
+            type="button"
+            className={styles.quantityBtn}
+            onClick={() => onQuantityChange(id, Math.max(1, quantity - 1))}
+          >
+            −
+          </button>
+          <span className={styles.quantityValue}>{quantity}</span>
+          <button
+            type="button"
+            className={styles.quantityBtn}
+            onClick={() => onQuantityChange(id, quantity + 1)}
+          >
+            +
+          </button>
+        </div>
+  </div>
+</div>
     </div>
   );
 };

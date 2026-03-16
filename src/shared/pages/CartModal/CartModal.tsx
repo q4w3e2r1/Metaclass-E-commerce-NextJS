@@ -40,8 +40,9 @@ export const CartModal = ({ isOpen, onClose }: CartModalProps) => {
   };
 
   const handleRemoveSelected = async () => {
-    await Promise.all([...selectedIds].map((id) => deleteFromCart(id)));
+    const toDelete = [...selectedIds];
     setSelectedIds(new Set());
+    await Promise.all(toDelete.map((id) => deleteFromCart(id)));
   };
 
   const handleQuantityChange = (id: number, newQty: number) => {
@@ -89,15 +90,14 @@ export const CartModal = ({ isOpen, onClose }: CartModalProps) => {
           <div className={styles.selectAll}>
             <CheckBox checked={allSelected} onChange={handleSelectAll} />
             <span className={styles.selectAllText}>Select all</span>
-            {selectedIds.size > 0 && (
-              <button
-                type="button"
-                className={styles.removeSelectedBtn}
-                onClick={handleRemoveSelected}
-              >
-                Delete selected
-              </button>
-            )}
+            <button
+              type="button"
+              className={styles.removeSelectedBtn}
+              onClick={handleRemoveSelected}
+              disabled={selectedIds.size === 0}
+            >
+              Delete selected
+            </button>
           </div>
         )}
 

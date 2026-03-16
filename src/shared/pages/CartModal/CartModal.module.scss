@@ -76,6 +76,23 @@
     color: #e53935;
     cursor: pointer;
     padding: 0;
+    transition: opacity 0.15s ease-in-out;
+
+    &:disabled {
+        color: #AFADB5;
+        cursor: not-allowed;
+    }
+}
+
+.removeSelectedBtn {
+    margin-left: auto;
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-family: inherit;
+    color: #e53935;
+    cursor: pointer;
+    padding: 0;
 }
 
 .items {
