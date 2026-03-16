@@ -1,10 +1,9 @@
-import styles from './Catalog.module.scss'
+import styles from './Catalog.module.scss';
 import CatalogHeader from './components/CatalogHeader';
 import CatalogSearch from './components/CatalogSearch';
 import ProductsList from './components/ProductsList';
 
 const CatalogPage = () => {
-
   return (
     <div className={styles.wrap}>
       <div className={styles.root}>
@@ -13,7 +12,7 @@ const CatalogPage = () => {
         <ProductsList />
       </div>
     </div>
-  )
+  );
 };
 
 export default CatalogPage;

@@ -1,7 +1,9 @@
 'use client';
 import { MultiDropdown } from '@components';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useState, useMemo } from 'react';
+
+import { useMemo, useState } from 'react';
+
+import { useRouter, useSearchParams } from 'next/navigation';
 
 type Option = { key: string; value: string };
 
@@ -50,7 +52,7 @@ export const CatalogSortFilter = () => {
       value={displayed}
       onChange={handleChange}
       onClose={handleClose}
-      getTitle={(v) => v.length ? v[v.length - 1].value : 'Sort by price'}
+      getTitle={(v) => (v.length ? v[v.length - 1].value : 'Sort by price')}
     />
   );
 };

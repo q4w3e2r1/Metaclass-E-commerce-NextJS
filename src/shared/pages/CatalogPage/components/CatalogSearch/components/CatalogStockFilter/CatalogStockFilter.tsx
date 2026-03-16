@@ -1,6 +1,8 @@
 'use client';
-import { useSearchParams, useRouter } from 'next/navigation';
 import CheckBox from '@components/CheckBox';
+
+import { useRouter, useSearchParams } from 'next/navigation';
+
 import styles from './CatalogStockFilter.module.scss';
 
 export const CatalogStockFilter = () => {
@@ -22,11 +24,10 @@ export const CatalogStockFilter = () => {
 
   return (
     <label className={styles.label}>
-      <CheckBox
-        checked={isInStock}
-        onChange={handleChange}
-      />
-      <span className={`${styles.text} ${isInStock ? styles.active : ""}`}>Only in stock</span>
+      <CheckBox checked={isInStock} onChange={handleChange} />
+      <span className={`${styles.text} ${isInStock ? styles.active : ''}`}>
+        Only in stock
+      </span>
     </label>
   );
 };

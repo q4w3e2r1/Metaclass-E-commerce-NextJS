@@ -1,8 +1,10 @@
+import type { Product } from '@app-types/product';
+import { routes } from '@config/routes';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { routes } from '@config/routes';
+
 import styles from './CategoryCard.module.scss';
-import type { Product } from '@app-types/product';
 
 type ProductCategoryDto = {
   id: number;

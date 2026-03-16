@@ -1,1 +1,1 @@
-export {default} from './ClearFilters'
+export { default } from './ClearFilters';

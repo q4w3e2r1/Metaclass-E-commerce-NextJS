@@ -1,1 +1,1 @@
-export {default} from './CatalogSortFilter'
+export { default } from './CatalogSortFilter';

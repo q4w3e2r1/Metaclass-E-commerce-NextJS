@@ -1,1 +1,1 @@
-export {default} from './CartModal'
+export { default } from './CartModal';

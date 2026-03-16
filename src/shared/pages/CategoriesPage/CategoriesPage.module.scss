@@ -1,18 +1,18 @@
 @use 'styles/mixins';
 
 .wrap {
-    padding: 0 20px;
-    background-color: #fafafa;
-    display: flex;
-    width: 100%;
-    min-height: 100vh;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
+  padding: 0 20px;
+  background-color: #fafafa;
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
 }
 
 .root {
-    max-width: 1240px;
-    width: 100%;
-    margin: 0 auto;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
 }

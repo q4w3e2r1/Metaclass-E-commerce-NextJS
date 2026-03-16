@@ -2,45 +2,45 @@
 @use 'styles/variables';
 
 .title {
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 36px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 36px;
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: variables.$space-m;
+  display: flex;
+  flex-direction: column;
+  gap: variables.$space-m;
 }
 
 .field {
-    display: flex;
-    flex-direction: column;
-    gap: variables.$space-xxs;
+  display: flex;
+  flex-direction: column;
+  gap: variables.$space-xxs;
 }
 
 .error {
-    font-size: 12px;
-    line-height: 16px;
-    color: #e53935;
+  font-size: 12px;
+  line-height: 16px;
+  color: #e53935;
 }
 
 .switch {
-    font-size: 16px;
-    line-height: 20px;
-    color: #AFADB5;
-    display: flex;
-    gap: variables.$space-xxs;
-    align-items: center;
+  font-size: 16px;
+  line-height: 20px;
+  color: #afadb5;
+  display: flex;
+  gap: variables.$space-xxs;
+  align-items: center;
 }
 
 .switchBtn {
-    background: none;
-    border: none;
-    padding: 0;
-    font-size: 16px;
-    font-family: inherit;
-    color: variables.$color-brand;
-    cursor: pointer;
-    text-decoration: underline;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 16px;
+  font-family: inherit;
+  color: variables.$color-brand;
+  cursor: pointer;
+  text-decoration: underline;
 }

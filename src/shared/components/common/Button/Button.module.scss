@@ -1,41 +1,41 @@
 @use 'styles/variables';
 
 .button {
-    padding: 14px 20px;
-    height: 52px;
-    box-sizing: border-box;
-  
-    background: variables.$color-brand;
-    color: #ffffff;
-  
-    font-size: 18px;
-    line-height: 18px;
-    font-weight: 400;
-  
-    border: none;
-    cursor: pointer;
-  
-    display: inline-flex;
-    gap: variables.$space-xxs;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    flex-wrap: nowrap;
-  
-    transition: background 0.15s ease-in-out;
+  padding: 14px 20px;
+  height: 52px;
+  box-sizing: border-box;
 
-    font-family: var(--font-roboto), sans-serif;
-  }
-  
-  .button:hover:not(:disabled) {
-    background: #86aaa7;
-  }
-  
-  .button:active:not(:disabled) {
-    background: variables.$color-brand-active;
-  }
-  
-  .button:disabled {
-    background: #d9d9d9;
-    cursor: not-allowed;
-  }
+  background: variables.$color-brand;
+  color: #ffffff;
+
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 400;
+
+  border: none;
+  cursor: pointer;
+
+  display: inline-flex;
+  gap: variables.$space-xxs;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+
+  transition: background 0.15s ease-in-out;
+
+  font-family: var(--font-roboto), sans-serif;
+}
+
+.button:hover:not(:disabled) {
+  background: #86aaa7;
+}
+
+.button:active:not(:disabled) {
+  background: variables.$color-brand-active;
+}
+
+.button:disabled {
+  background: #d9d9d9;
+  cursor: not-allowed;
+}

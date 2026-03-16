@@ -1,8 +1,11 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import { ArrowDownIcon } from '@components';
-import styles from './ProductPage.module.scss';
+
 import { useEffect } from 'react';
+
+import { useRouter } from 'next/navigation';
+
+import styles from './ProductPage.module.scss';
 
 interface ProductPageProps {
   children: React.ReactNode;
@@ -15,15 +18,15 @@ export const ProductPage = ({ children }: ProductPageProps) => {
     if (window.history.length > 1) {
       router.back();
     } else {
-      router.push("/");
+      router.push('/');
     }
   };
 
   useEffect(() => {
     const timer = setTimeout(() => {
-        window.scrollTo(0, 0);
+      window.scrollTo(0, 0);
     }, 0);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -31,7 +34,9 @@ export const ProductPage = ({ children }: ProductPageProps) => {
     <div className={styles.productPage}>
       <div className={styles.product}>
         <button className={styles.backward} onClick={handleBack}>
-          <div className={styles.icon}><ArrowDownIcon /></div>
+          <div className={styles.icon}>
+            <ArrowDownIcon />
+          </div>
           Назад
         </button>
         {children}

@@ -1,8 +1,16 @@
 'use client';
-import { useSearchParams, useRouter } from 'next/navigation';
 import { Button } from '@components';
 
-const FILTER_PARAMS = ['categories', 'sort', 'priceFrom', 'priceTo', 'rating', 'inStock'];
+import { useRouter, useSearchParams } from 'next/navigation';
+
+const FILTER_PARAMS = [
+  'categories',
+  'sort',
+  'priceFrom',
+  'priceTo',
+  'rating',
+  'inStock',
+];
 
 export const ClearFilters = () => {
   const searchParams = useSearchParams();
@@ -18,12 +26,14 @@ export const ClearFilters = () => {
   };
 
   return (
-    <Button onClick={handleClear} disabled={!hasFilters}
-    style={{width:"160px"}}
+    <Button
+      onClick={handleClear}
+      disabled={!hasFilters}
+      style={{ width: '160px' }}
     >
       Clear filters
     </Button>
   );
 };
 
-export default ClearFilters
+export default ClearFilters;

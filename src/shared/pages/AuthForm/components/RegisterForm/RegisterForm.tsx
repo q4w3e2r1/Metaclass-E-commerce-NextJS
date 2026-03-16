@@ -1,23 +1,28 @@
 'use client';
-import { useForm, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { useRouter } from 'next/navigation';
-import { Input, Button } from '@components';
 import { register } from '@api/auth/auth';
 import { saveToken } from '@api/auth/store';
+import { Button, Input } from '@components';
 import { routes } from '@config/routes';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+import { Controller, useForm } from 'react-hook-form';
+
+import { useRouter } from 'next/navigation';
+
 import styles from './RegisterForm.module.scss';
 
-const registerSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
-  confirmPassword: z.string(),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ['confirmPassword'],
-});
+const registerSchema = z
+  .object({
+    name: z.string().min(2, 'Name must be at least 2 characters'),
+    email: z.string().email('Invalid email'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'],
+  });
 
 type RegisterData = z.infer<typeof registerSchema>;
 
@@ -126,7 +131,9 @@ export const RegisterForm = ({ onSwitch }: RegisterFormProps) => {
             )}
           />
           {errors.confirmPassword && (
-            <span className={styles.error}>{errors.confirmPassword.message}</span>
+            <span className={styles.error}>
+              {errors.confirmPassword.message}
+            </span>
           )}
         </div>
 

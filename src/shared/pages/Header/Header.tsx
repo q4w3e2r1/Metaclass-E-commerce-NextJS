@@ -1,11 +1,14 @@
 'use client';
+import { routes } from '@config/routes';
+import CartModal from '@pages/CartModal';
+
+import { useState } from 'react';
+
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+
 import styles from './Header.module.scss';
-import { routes } from '@config/routes';
-import Image from 'next/image';
-import CartModal from '@pages/CartModal';
 
 export const Header = () => {
   const pathname = usePathname();
@@ -24,15 +27,23 @@ export const Header = () => {
             </div>
           </Link>
           <ul className={styles.menu}>
-            <li className={pathname === routes.products.getRoute() ? styles.active : ''}>
+            <li
+              className={
+                pathname === routes.products.getRoute() ? styles.active : ''
+              }
+            >
               <Link href={routes.products.getRoute()}>Products</Link>
             </li>
-            <li className={pathname === routes.categories.getRoute() ? styles.active : ''}>
+            <li
+              className={
+                pathname === routes.categories.getRoute() ? styles.active : ''
+              }
+            >
               <Link href={routes.categories.getRoute()}>Categories</Link>
             </li>
             <li>About us</li>
           </ul>
-          <div className={styles["user-tools"]}>
+          <div className={styles['user-tools']}>
             <button
               type="button"
               className={styles.iconBtn}

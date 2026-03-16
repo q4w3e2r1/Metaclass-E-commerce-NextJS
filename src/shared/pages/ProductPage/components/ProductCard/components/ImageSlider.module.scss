@@ -1,80 +1,80 @@
 @use 'styles/variables';
 
 .slider {
-    width: 100%;
-    max-width: 600px;
-    min-width: 200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: variables.$space-xs;
+  width: 100%;
+  max-width: 600px;
+  min-width: 200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: variables.$space-xs;
 }
 
 .imageWrapper {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .image {
-    width: 100%;
-    height: auto !important;
-    object-fit: contain;
-    display: block;
+  width: 100%;
+  height: auto !important;
+  object-fit: contain;
+  display: block;
 }
 
 .arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.4);
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.15s ease-in-out;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease-in-out;
 
-    &:hover {
-        background: rgba(0, 0, 0, 0.6);
-    }
+  &:hover {
+    background: rgba(0, 0, 0, 0.6);
+  }
 }
 
 .arrowLeft {
-    left: 12px;
+  left: 12px;
 }
 
 .arrowRight {
-    right: 12px;
+  right: 12px;
 }
 
 .thumbnails {
-    display: flex;
-    gap: variables.$space-xxs;
+  display: flex;
+  gap: variables.$space-xxs;
 }
 
 .thumbnail {
-    background: none;
-    border: 2px solid transparent;
-    padding: 0;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: border-color 0.15s ease-in-out;
+  background: none;
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.15s ease-in-out;
 
-    &:hover {
-        border-color: rgba(0, 0, 0, 0.2);
-    }
+  &:hover {
+    border-color: rgba(0, 0, 0, 0.2);
+  }
 }
 
 .thumbnailActive {
-    border-color: variables.$color-brand;
+  border-color: variables.$color-brand;
 }
 
 .thumbnailImage {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    display: block;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  display: block;
 }

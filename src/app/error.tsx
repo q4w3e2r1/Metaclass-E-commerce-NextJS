@@ -14,12 +14,11 @@ export default function Error({
         <div className={styles.icon}>⚠️</div>
         <h1 className={styles.title}>Что-то пошло не так</h1>
         <p className={styles.description}>
-          Произошла непредвиденная ошибка. Мы уже знаем о проблеме и работаем над её устранением.
+          Произошла непредвиденная ошибка. Мы уже знаем о проблеме и работаем
+          над её устранением.
         </p>
         {error.message && (
-          <div className={styles.errorMessage}>
-            {error.message}
-          </div>
+          <div className={styles.errorMessage}>{error.message}</div>
         )}
         <div className={styles.buttons}>
           <button onClick={reset} className={styles.buttonPrimary}>

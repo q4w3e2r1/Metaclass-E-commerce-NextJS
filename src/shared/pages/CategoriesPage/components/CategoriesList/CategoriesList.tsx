@@ -1,4 +1,8 @@
-import { getCategories, getTopProductsByCategory } from '@api/categories.server';
+import {
+  getCategories,
+  getTopProductsByCategory,
+} from '@api/categories.server';
+
 import styles from './CategoriesList.module.scss';
 import CategoryCard from './components/CategoryCard';
 

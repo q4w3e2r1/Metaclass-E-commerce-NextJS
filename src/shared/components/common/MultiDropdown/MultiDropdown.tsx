@@ -1,7 +1,8 @@
-"use client";
+'use client';
 import React from 'react';
-import Input from '../Input';
+
 import ArrowDownIcon from '../ArrowDownIcon';
+import Input from '../Input';
 import styles from './MultiDropdown.module.scss';
 
 export type Option = {
@@ -67,11 +68,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     option.value.toLowerCase().includes(search.toLowerCase())
   );
 
-  const inputValue = isOpen
-    ? search
-    : hasSelectedOptions
-    ? titleText
-    : '';
+  const inputValue = isOpen ? search : hasSelectedOptions ? titleText : '';
 
   return (
     <div
@@ -93,12 +90,12 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
           setIsOpen(true);
         }}
         afterSlot={
-          <ArrowDownIcon 
-            color="secondary" 
+          <ArrowDownIcon
+            color="secondary"
             style={{
               transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
               transition: 'transform 0.2s ease',
-              }} 
+            }}
             onMouseDown={(e) => {
               e.preventDefault(); // не даём инпуту потерять/получить фокус
               if (isOpen) {
@@ -109,10 +106,11 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
                 containerRef.current?.querySelector('input')?.focus();
               }
             }}
-          />}
+          />
+        }
         disabled={disabled}
         placeholder={hasSelectedOptions ? titleText : getTitle([])}
-        cursor='pointer'
+        cursor="pointer"
       />
 
       {isOpen && !disabled && (

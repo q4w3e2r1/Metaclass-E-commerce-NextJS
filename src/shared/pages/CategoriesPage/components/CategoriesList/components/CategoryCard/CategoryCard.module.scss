@@ -1,67 +1,67 @@
 @use 'styles/variables';
 
 .card {
-    max-width: 360px;
-    background-color: #ffffff;
-    box-sizing: border-box;
-    cursor: pointer;
-    transition: box-shadow 0.15s ease-in-out;
-    text-decoration: none;
-    color: inherit;
+  max-width: 360px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease-in-out;
+  text-decoration: none;
+  color: inherit;
 
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
-    &:hover {
-        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
-    }
+  &:hover {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+  }
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    width: 100%;
-    height: 358px;
-    background-color: #d9d9d9;
-    flex-shrink: 0;
-    overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 100%;
+  height: 358px;
+  background-color: #d9d9d9;
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
 .cell {
-    position: relative;
-    width: 100%;
-    height: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .image {
-    object-fit: cover;
+  object-fit: cover;
 }
 
 .placeholder {
-    width: 100%;
-    height: 100%;
-    background-color: #f3f3f3;
+  width: 100%;
+  height: 100%;
+  background-color: #f3f3f3;
 }
 
 .content {
-    padding: variables.$space-xl variables.$space-xs;
-    display: flex;
-    flex-direction: column;
-    gap: variables.$space-xxs;
-    flex: 1;
+  padding: variables.$space-xl variables.$space-xs;
+  display: flex;
+  flex-direction: column;
+  gap: variables.$space-xxs;
+  flex: 1;
 }
 
 .title {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 24px;
-    color: variables.$color-text-primary;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  color: variables.$color-text-primary;
 }
 
 .count {
-    font-size: 16px;
-    line-height: 20px;
-    color: #AFADB5;
+  font-size: 16px;
+  line-height: 20px;
+  color: #afadb5;
 }

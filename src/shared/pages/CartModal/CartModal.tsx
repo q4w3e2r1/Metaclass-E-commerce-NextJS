@@ -1,10 +1,13 @@
 'use client';
-import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@components';
-import CartItem from './components/CartItem';
-import styles from './CartModal.module.scss';
+
+import { useCallback, useEffect, useState } from 'react';
+
 import CheckBox from '@/shared/components/common/CheckBox';
 import { useCart } from '@/shared/hooks/cart/useCartQuery';
+
+import styles from './CartModal.module.scss';
+import CartItem from './components/CartItem';
 
 type CartModalProps = {
   isOpen: boolean;
@@ -12,7 +15,8 @@ type CartModalProps = {
 };
 
 export const CartModal = ({ isOpen, onClose }: CartModalProps) => {
-  const { cart, addToCart, removeFromCart, deleteFromCart, isLoading } = useCart();
+  const { cart, addToCart, removeFromCart, deleteFromCart, isLoading } =
+    useCart();
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
 
   const items = cart ?? [];
@@ -27,7 +31,9 @@ export const CartModal = ({ isOpen, onClose }: CartModalProps) => {
   };
 
   const handleSelectAll = (checked: boolean) => {
-    setSelectedIds(checked ? new Set(items.map((i) => i.product.id)) : new Set());
+    setSelectedIds(
+      checked ? new Set(items.map((i) => i.product.id)) : new Set()
+    );
   };
 
   const handleRemove = async (productId: number) => {
@@ -55,14 +61,14 @@ export const CartModal = ({ isOpen, onClose }: CartModalProps) => {
     }
   };
 
-  const total = items.reduce(
-    (sum, i) => sum + i.product.price * i.quantity,
-    0
-  );
+  const total = items.reduce((sum, i) => sum + i.product.price * i.quantity, 0);
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape') onClose();
-  }, [onClose]);
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    },
+    [onClose]
+  );
 
   useEffect(() => {
     if (isOpen) {
@@ -80,10 +86,11 @@ export const CartModal = ({ isOpen, onClose }: CartModalProps) => {
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-
         <div className={styles.header}>
           <h2 className={styles.title}>Cart</h2>
-          <button type="button" className={styles.closeBtn} onClick={onClose}>✕</button>
+          <button type="button" className={styles.closeBtn} onClick={onClose}>
+            ✕
+          </button>
         </div>
 
         {items.length > 0 && (
@@ -108,7 +115,9 @@ export const CartModal = ({ isOpen, onClose }: CartModalProps) => {
             <div className={styles.empty}>
               <div className={styles.emptyIcon}>🛒</div>
               <div className={styles.emptyTitle}>Cart is empty</div>
-              <div className={styles.emptySubtitle}>Add something from the catalog</div>
+              <div className={styles.emptySubtitle}>
+                Add something from the catalog
+              </div>
             </div>
           ) : (
             items.map((item) => {

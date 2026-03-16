@@ -1,1 +1,1 @@
-export {default} from './ProductCardSkeleton'
+export { default } from './ProductCardSkeleton';

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './CheckBox.module.scss';
 
 export type CheckBoxProps = Omit<
@@ -8,7 +9,13 @@ export type CheckBoxProps = Omit<
   onChange: (checked: boolean) => void;
 };
 
-const CheckBox: React.FC<CheckBoxProps> = ({ onChange, checked, disabled, className = '', ...props }) => {
+const CheckBox: React.FC<CheckBoxProps> = ({
+  onChange,
+  checked,
+  disabled,
+  className = '',
+  ...props
+}) => {
   const handleChange = () => {
     if (disabled) return;
     onChange(!checked);

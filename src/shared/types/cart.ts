@@ -8,5 +8,5 @@ export interface CartItem {
   createdAt: string;
   updatedAt: string;
 }
-  
-  export type CartResponse = CartItem[];
+
+export type CartResponse = CartItem[];

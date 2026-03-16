@@ -1,9 +1,14 @@
-import { Suspense } from 'react';
-import { dehydrate, QueryClient } from '@tanstack/react-query';
-import { HydrationBoundary } from '@tanstack/react-query';
+import {
+  getProductById,
+  getRelatedProductsByCategory,
+} from '@api/products.server';
 import ProductPage from '@pages/ProductPage';
 import ProductCard from '@pages/ProductPage/components/ProductCard';
-import { getProductById, getRelatedProductsByCategory } from '@api/products.server';
+
+import { Suspense } from 'react';
+
+import { dehydrate, QueryClient } from '@tanstack/react-query';
+import { HydrationBoundary } from '@tanstack/react-query';
 
 export async function generateMetadata({
   params,
@@ -42,12 +47,15 @@ export default async function Page({
     queryFn: () => getProductById(productId),
   });
 
-  const product = queryClient.getQueryData<Awaited<ReturnType<typeof getProductById>>>(['product', productId]);
+  const product = queryClient.getQueryData<
+    Awaited<ReturnType<typeof getProductById>>
+  >(['product', productId]);
 
   if (product?.productCategory) {
     await queryClient.prefetchQuery({
       queryKey: ['relatedProducts', product.productCategory.id, productId],
-      queryFn: () => getRelatedProductsByCategory(product.productCategory!.id, productId),
+      queryFn: () =>
+        getRelatedProductsByCategory(product.productCategory!.id, productId),
     });
   }
 

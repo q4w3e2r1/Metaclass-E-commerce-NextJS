@@ -1,6 +1,7 @@
 // AuthForm.tsx
 'use client';
 import { useState } from 'react';
+
 import styles from './AuthForm.module.scss';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
@@ -11,10 +12,11 @@ export const AuthForm = () => {
   return (
     <div className={styles.page}>
       <div className={styles.card}>
-        {mode === 'login'
-          ? <LoginForm onSwitch={() => setMode('register')} />
-          : <RegisterForm onSwitch={() => setMode('login')} />
-        }
+        {mode === 'login' ? (
+          <LoginForm onSwitch={() => setMode('register')} />
+        ) : (
+          <RegisterForm onSwitch={() => setMode('login')} />
+        )}
       </div>
     </div>
   );

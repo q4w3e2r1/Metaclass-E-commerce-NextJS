@@ -1,1 +1,1 @@
-export {default} from './MultiDropdown'
+export { default } from './MultiDropdown';

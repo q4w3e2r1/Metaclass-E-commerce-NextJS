@@ -1,7 +1,9 @@
 'use client';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { MultiDropdown } from '@components';
+
+import { useState } from 'react';
+
+import { useRouter, useSearchParams } from 'next/navigation';
 
 type Option = { key: string; value: string };
 
@@ -52,7 +54,7 @@ export const CatalogRatingFilter = () => {
       value={displayed}
       onChange={handleChange}
       onClose={handleClose}
-      getTitle={(v) => v.length ? v[0].value : 'Rating'}
+      getTitle={(v) => (v.length ? v[0].value : 'Rating')}
     />
   );
 };

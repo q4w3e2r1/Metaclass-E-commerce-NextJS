@@ -1,8 +1,11 @@
 'use client';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useState, useRef, useMemo } from 'react';
 import { Input } from '@components';
 import { ArrowDownIcon } from '@components';
+
+import { useMemo, useRef, useState } from 'react';
+
+import { useRouter, useSearchParams } from 'next/navigation';
+
 import styles from './CatalogPriceFilter.module.scss';
 
 const PRICE_PRESETS = [10, 25, 50, 100, 500, 1000];
@@ -20,7 +23,8 @@ export const CatalogPriceFilter = () => {
   const activePriceTo = searchParams.get('priceTo') ?? '';
 
   const getTitle = () => {
-    if (activePriceFrom && activePriceTo) return `$${activePriceFrom} — $${activePriceTo}`;
+    if (activePriceFrom && activePriceTo)
+      return `$${activePriceFrom} — $${activePriceTo}`;
     if (activePriceTo) return `Up to $${activePriceTo}`;
     if (activePriceFrom) return `From $${activePriceFrom}`;
     return '';
@@ -28,8 +32,10 @@ export const CatalogPriceFilter = () => {
 
   const applyFilter = (from: string, to: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    if (from) params.set('priceFrom', from); else params.delete('priceFrom');
-    if (to) params.set('priceTo', to); else params.delete('priceTo');
+    if (from) params.set('priceFrom', from);
+    else params.delete('priceFrom');
+    if (to) params.set('priceTo', to);
+    else params.delete('priceTo');
     params.delete('page');
     router.push(`?${params.toString()}`, { scroll: false });
   };
@@ -64,9 +70,7 @@ export const CatalogPriceFilter = () => {
         close();
       }}
     >
-      <div
-        className={`${styles.trigger} ${isOpen ? styles.triggerOpen : ''}`}
-      >
+      <div className={`${styles.trigger} ${isOpen ? styles.triggerOpen : ''}`}>
         <Input
           value={isOpen ? '' : getTitle()}
           onChange={() => {}}
@@ -75,12 +79,12 @@ export const CatalogPriceFilter = () => {
             if (!isOpen) handleOpen();
           }}
           afterSlot={
-            <ArrowDownIcon 
-              color="secondary" 
+            <ArrowDownIcon
+              color="secondary"
               style={{
                 transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                 transition: 'transform 0.2s ease',
-                }} 
+              }}
               onMouseDown={(e) => {
                 e.preventDefault();
                 if (isOpen) {
@@ -90,8 +94,9 @@ export const CatalogPriceFilter = () => {
                   containerRef.current?.querySelector('input')?.focus();
                 }
               }}
-            />}
-          cursor='pointer'
+            />
+          }
+          cursor="pointer"
           readOnly
         />
       </div>
@@ -136,4 +141,4 @@ export const CatalogPriceFilter = () => {
   );
 };
 
-export default CatalogPriceFilter
+export default CatalogPriceFilter;

@@ -1,9 +1,12 @@
+import { getProductsInfiniteServer } from '@api/products.server';
+import CatalogPage from '@pages/CatalogPage';
+
 import { Suspense } from 'react';
+
+import { Metadata } from 'next';
+
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { HydrationBoundary } from '@tanstack/react-query';
-import CatalogPage from '@pages/CatalogPage';
-import { getProductsInfiniteServer } from '@api/products.server';
-import { Metadata } from 'next';
 
 export const revalidate = 600;
 

@@ -1,7 +1,7 @@
-import qs from "qs";
+import qs from 'qs';
 
 export const buildQuery = (params?: Record<string, unknown>) => {
-  if (!params) return "";
+  if (!params) return '';
   return qs.stringify(params, {
     encodeValuesOnly: true,
   });

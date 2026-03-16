@@ -1,8 +1,11 @@
-import { Roboto } from 'next/font/google';
-import '@/shared/styles/globals.scss';
-import { Providers } from './providers';
 import Header from '@pages/Header';
+
 import type { Metadata } from 'next';
+import { Roboto } from 'next/font/google';
+
+import '@/shared/styles/globals.scss';
+
+import { Providers } from './providers';
 
 const roboto = Roboto({
   subsets: ['latin', 'cyrillic'],
@@ -15,7 +18,11 @@ export const metadata: Metadata = {
   description: 'Магазин мебели и товаров для дома',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="ru" className={roboto.variable}>
       <body>

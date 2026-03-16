@@ -1,1 +1,1 @@
-export {default} from './CatalogPriceFilter'
+export { default } from './CatalogPriceFilter';

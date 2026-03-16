@@ -1,13 +1,16 @@
 'use client';
-import { Card, CartButton, ProductCardSkeleton } from '@components'
-import styles from './ProductsList.module.scss'
-import { useInfiniteProducts } from "@hooks/products/useInfiniteProducts";
-import { useSearchParams } from "next/navigation";
-import Link from "next/link";
-import { useMemo, Fragment } from 'react';
+import { Card, CartButton, ProductCardSkeleton } from '@components';
+import { routes } from '@config/routes';
 import { useCart } from '@hooks/cart/useCartQuery';
+import { useInfiniteProducts } from '@hooks/products/useInfiniteProducts';
 import { useInfiniteScroll } from '@hooks/useInfiniteScroll';
-import { routes } from '@config/routes'
+
+import { Fragment, useMemo } from 'react';
+
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+
+import styles from './ProductsList.module.scss';
 
 const SKELETON_COUNT = 6;
 const SKELETON_ITEMS = Array.from({ length: SKELETON_COUNT }, (_, i) => i);
@@ -16,34 +19,35 @@ export const ProductsList = () => {
   const { cart } = useCart();
   const searchParams = useSearchParams();
 
-  const search = searchParams.get("search") ?? "";
+  const search = searchParams.get('search') ?? '';
   const categoryIds = useMemo(() => {
-    return searchParams.get("categories")?.split(",").filter(Boolean) ?? [];
+    return searchParams.get('categories')?.split(',').filter(Boolean) ?? [];
   }, [searchParams]);
-  const sort = searchParams.get("sort") ?? undefined;
-  const priceFrom = searchParams.get("priceFrom") ?? undefined;
-  const priceTo = searchParams.get("priceTo") ?? undefined;
-  const rating = searchParams.get("rating") ?? undefined;
-  const inStock = searchParams.get("inStock") === "true" || undefined;
+  const sort = searchParams.get('sort') ?? undefined;
+  const priceFrom = searchParams.get('priceFrom') ?? undefined;
+  const priceTo = searchParams.get('priceTo') ?? undefined;
+  const rating = searchParams.get('rating') ?? undefined;
+  const inStock = searchParams.get('inStock') === 'true' || undefined;
 
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    isLoading,
-  } = useInfiniteProducts(categoryIds, search, 1, sort, priceFrom, priceTo, rating, inStock);
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
+    useInfiniteProducts(
+      categoryIds,
+      search,
+      1,
+      sort,
+      priceFrom,
+      priceTo,
+      rating,
+      inStock
+    );
 
   const totalPages = data?.pages.length ?? 0;
 
-  const {
-    loaderRef,
-    observePage,
-  } = useInfiniteScroll({
+  const { loaderRef, observePage } = useInfiniteScroll({
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage,
-    totalPages
+    totalPages,
   });
 
   const total = data?.pages?.[0]?.pagination?.total ?? 0;
@@ -71,7 +75,9 @@ export const ProductsList = () => {
         <div className={styles.empty}>
           <div className={styles.emptyIcon}>🔍</div>
           <div className={styles.emptyTitle}>No products found</div>
-          <div className={styles.emptySubtitle}>Try changing your search or filters</div>
+          <div className={styles.emptySubtitle}>
+            Try changing your search or filters
+          </div>
         </div>
       </div>
     );
@@ -94,13 +100,10 @@ export const ProductsList = () => {
                 const imageUrl =
                   product.images?.[0]?.formats?.small?.url ||
                   product.images?.[0]?.url ||
-                  "";
+                  '';
 
                 return (
-                  <div
-                    key={product.documentId}
-                    className={styles.cardWrapper}
-                  >
+                  <div key={product.documentId} className={styles.cardWrapper}>
                     {productIndex === 0 && (
                       <div
                         data-page={pageNumber}
@@ -111,7 +114,7 @@ export const ProductsList = () => {
                     )}
                     <Link
                       href={routes.product.getRoute(product.documentId)}
-                      style={{ textDecoration: "none", color: "inherit" }}
+                      style={{ textDecoration: 'none', color: 'inherit' }}
                     >
                       <Card
                         image={imageUrl}
@@ -119,11 +122,7 @@ export const ProductsList = () => {
                         priority={productIndex === 0 && pageIndex === 0}
                         subtitle={product.description}
                         contentSlot={<span>{product.price}</span>}
-                        actionSlot={
-                          <CartButton
-                            productId={product.id}
-                          />
-                        }
+                        actionSlot={<CartButton productId={product.id} />}
                       />
                     </Link>
                   </div>
@@ -134,9 +133,7 @@ export const ProductsList = () => {
         })}
       </div>
 
-      {hasNextPage && (
-        <div ref={loaderRef} className={styles.loader} />
-      )}
+      {hasNextPage && <div ref={loaderRef} className={styles.loader} />}
     </div>
   );
 };

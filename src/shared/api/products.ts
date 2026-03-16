@@ -1,10 +1,17 @@
-import { api } from "./axios";
-import { buildQuery } from "./queryBuilder";
-import type { Product, StrapiResponse, RelatedProductsResponse, StrapiSingleResponse, InfiniteProductsResponse } from '@app-types/product';
+import type {
+  InfiniteProductsResponse,
+  Product,
+  RelatedProductsResponse,
+  StrapiResponse,
+  StrapiSingleResponse,
+} from '@app-types/product';
+
+import { api } from './axios';
+import { buildQuery } from './queryBuilder';
 
 export const getProductById = async (documentId: string) => {
   const query = buildQuery({
-    populate: ["images", "productCategory"],
+    populate: ['images', 'productCategory'],
   });
 
   const { data } = await api.get<StrapiSingleResponse<Product>>(
@@ -14,14 +21,12 @@ export const getProductById = async (documentId: string) => {
   return data.data;
 };
 
-
 export const getRelatedProductsByCategory = async (
   categoryId: number,
   excludeDocumentId?: string
 ): Promise<RelatedProductsResponse> => {
-
   const query = buildQuery({
-    populate: ["images", "productCategory"],
+    populate: ['images', 'productCategory'],
     filters: {
       productCategory: {
         id: {
@@ -36,9 +41,7 @@ export const getRelatedProductsByCategory = async (
     },
   });
 
-  const { data } = await api.get<StrapiResponse<Product>>(
-    `/products?${query}`
-  );
+  const { data } = await api.get<StrapiResponse<Product>>(`/products?${query}`);
 
   return {
     items: data.data,
@@ -52,14 +55,14 @@ type GetInfiniteProductsParams = {
   pageSize: number;
   categories?: string[];
   search?: string;
-  sort?:string;
+  sort?: string;
   priceFrom?: string;
   priceTo?: string;
-  rating?:string;
-  inStock?:boolean
+  rating?: string;
+  inStock?: boolean;
 };
 
-export const  getProductsInfinite = async ({
+export const getProductsInfinite = async ({
   page,
   pageSize,
   categories,
@@ -70,9 +73,8 @@ export const  getProductsInfinite = async ({
   rating,
   inStock,
 }: GetInfiniteProductsParams): Promise<InfiniteProductsResponse> => {
-
   const filters: Record<string, unknown> = {};
-  
+
   if (categories && categories.length > 0) {
     filters.productCategory = {
       id: {
@@ -109,7 +111,7 @@ export const  getProductsInfinite = async ({
   const resolvedSort = sort ?? (rating ? 'rating:asc' : undefined);
 
   const query = buildQuery({
-    populate: ["images", "productCategory"],
+    populate: ['images', 'productCategory'],
     pagination: {
       page,
       pageSize,
@@ -119,9 +121,7 @@ export const  getProductsInfinite = async ({
     ...(resolvedSort && { sort: resolvedSort }),
   });
 
-  const { data } = await api.get<StrapiResponse<Product>>(
-    `/products?${query}`
-  );
+  const { data } = await api.get<StrapiResponse<Product>>(`/products?${query}`);
 
   return {
     items: data.data,

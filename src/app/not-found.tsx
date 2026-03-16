@@ -1,6 +1,8 @@
-import Link from 'next/link';
-import styles from './not-found.module.scss';
 import { routes } from '@config/routes';
+
+import Link from 'next/link';
+
+import styles from './not-found.module.scss';
 
 export default function NotFound() {
   return (

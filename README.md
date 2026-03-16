@@ -9,6 +9,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Getting Started
 
 First, run the development server:
+
 ```bash
 npm run dev
 # or
@@ -20,6 +21,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Build
 
 To create a production build:
+
 ```bash
 npm run build
 # or
@@ -27,6 +29,7 @@ yarn build
 ```
 
 To run the production build locally:
+
 ```bash
 npm run start
 # or

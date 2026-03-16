@@ -1,10 +1,17 @@
-import { buildQuery } from "./queryBuilder";
-import type { Product, StrapiResponse, StrapiSingleResponse, RelatedProductsResponse, InfiniteProductsResponse } from '@app-types/product';
+import type {
+  InfiniteProductsResponse,
+  Product,
+  RelatedProductsResponse,
+  StrapiResponse,
+  StrapiSingleResponse,
+} from '@app-types/product';
+
+import { buildQuery } from './queryBuilder';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const getProductById = async (documentId: string) => {
-  const query = buildQuery({ populate: ["images", "productCategory"] });
+  const query = buildQuery({ populate: ['images', 'productCategory'] });
 
   const res = await fetch(`${BASE_URL}/products/${documentId}?${query}`, {
     next: { revalidate: 60 },
@@ -21,7 +28,7 @@ export const getRelatedProductsByCategory = async (
   excludeDocumentId?: string
 ): Promise<RelatedProductsResponse> => {
   const query = buildQuery({
-    populate: ["images", "productCategory"],
+    populate: ['images', 'productCategory'],
     filters: {
       productCategory: { id: { $eq: categoryId } },
       ...(excludeDocumentId && { documentId: { $ne: excludeDocumentId } }),
@@ -31,7 +38,6 @@ export const getRelatedProductsByCategory = async (
   const res = await fetch(`${BASE_URL}/products?${query}`, {
     next: { revalidate: 60 },
   });
-
 
   const data: StrapiResponse<Product> = await res.json();
   return {
@@ -49,7 +55,7 @@ export const getProductsInfiniteServer = async ({
   pageSize: number;
 }): Promise<InfiniteProductsResponse> => {
   const query = buildQuery({
-    populate: ["images", "productCategory"],
+    populate: ['images', 'productCategory'],
     pagination: { page, pageSize, withCount: true },
   });
 

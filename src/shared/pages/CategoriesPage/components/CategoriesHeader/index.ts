@@ -1,1 +1,1 @@
-export {default} from './CategoriesHeader'
+export { default } from './CategoriesHeader';

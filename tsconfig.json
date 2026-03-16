@@ -18,7 +18,7 @@
         "name": "next"
       }
     ],
-   "baseUrl": "./src",
+    "baseUrl": "./src",
     "paths": {
       "@/*": ["./*"],
       "@components": ["shared/components/common/index.ts"],
@@ -32,7 +32,7 @@
       "utils/*": ["shared/utils/*"],
       "@hooks/*": ["shared/hooks/*"],
       "@app-types/*": ["shared/types/*"],
-      "@api/*": ["shared/api/*"],
+      "@api/*": ["shared/api/*"]
     }
   },
   "include": [

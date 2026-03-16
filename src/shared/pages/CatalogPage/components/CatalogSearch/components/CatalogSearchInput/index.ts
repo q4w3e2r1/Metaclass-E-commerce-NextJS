@@ -1,1 +1,1 @@
-export {default} from './CatalogSearchInput'
+export { default } from './CatalogSearchInput';

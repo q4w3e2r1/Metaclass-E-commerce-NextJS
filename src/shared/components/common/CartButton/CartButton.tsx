@@ -1,11 +1,13 @@
-"use client";
-import { Button } from '@components';
-import { useCart } from '@hooks/cart/useCartQuery';
-import { useState, useEffect, useRef, useMemo } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+'use client';
 import { getToken } from '@api/auth/store';
+import { Button } from '@components';
 import { routes } from '@config/routes';
+import { useCart } from '@hooks/cart/useCartQuery';
+
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
+
+import { usePathname, useRouter } from 'next/navigation';
 
 interface CartButtonProps {
   productId: number;
@@ -13,20 +15,20 @@ interface CartButtonProps {
   children?: ReactNode;
 }
 
-export const CartButton = ({ 
-  productId, 
+export const CartButton = ({
+  productId,
   className = '',
-  children 
+  children,
 }: CartButtonProps) => {
   const { cart, addToCart, removeFromCart } = useCart();
   const [showLoading, setShowLoading] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  
+
   const isInCart = useMemo(() => {
-    return cart?.some(item => item.product.id === productId) ?? false;
+    return cart?.some((item) => item.product.id === productId) ?? false;
   }, [cart, productId]);
-  
+
   const prevIsInCartRef = useRef(isInCart);
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export const CartButton = ({
     }
 
     setShowLoading(true);
-    
+
     try {
       if (isInCart) {
         await removeFromCart(productId);
@@ -66,7 +68,7 @@ export const CartButton = ({
       loading={showLoading}
       minWidth={155}
     >
-      {children || (isInCart ? "Delete from Cart" : "Add to Cart")}
+      {children || (isInCart ? 'Delete from Cart' : 'Add to Cart')}
     </Button>
   );
 };

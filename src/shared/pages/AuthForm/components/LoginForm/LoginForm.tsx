@@ -1,12 +1,15 @@
 'use client';
-import { useForm, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { useRouter } from 'next/navigation';
-import { Input, Button } from '@components';
 import { login } from '@api/auth/auth';
 import { saveToken } from '@api/auth/store';
+import { Button, Input } from '@components';
 import { routes } from '@config/routes';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+import { Controller, useForm } from 'react-hook-form';
+
+import { useRouter } from 'next/navigation';
+
 import styles from './LoginForm.module.scss';
 
 const loginSchema = z.object({
