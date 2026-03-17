@@ -28,7 +28,7 @@
   line-height: 24px;
   text-align: center;
   font-size: 1rem;
-  color: #afadb5;
+  color: var(--color-text-secondary);
 
   @include mixins.respond('md') {
     font-size: 1.25rem;

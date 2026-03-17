@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background-color: #fafafa;
+  background-color: var(--color-bg);
 }
 
 .content {
@@ -23,7 +23,7 @@
   font-size: 120px;
   font-weight: 700;
   line-height: 1;
-  color: variables.$color-brand;
+  color: var(--color-brand);
   opacity: 0.2;
 }
 
@@ -31,13 +31,13 @@
   font-size: 32px;
   font-weight: 700;
   line-height: 36px;
-  color: variables.$color-text-primary;
+  color: var(--color-text-primary);
 }
 
 .description {
   font-size: 16px;
   line-height: 24px;
-  color: #afadb5;
+  color: var(--color-text-secondary);
 }
 
 .link {
@@ -45,7 +45,7 @@
   padding: 0 variables.$space-xl;
   display: flex;
   align-items: center;
-  background-color: variables.$color-brand;
+  background-color: var(--color-brand);
   color: #ffffff;
   text-decoration: none;
   font-size: 16px;

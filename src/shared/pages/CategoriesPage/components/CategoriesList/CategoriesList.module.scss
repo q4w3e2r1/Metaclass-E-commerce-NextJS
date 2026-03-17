@@ -34,7 +34,7 @@
   font-style: bold;
   font-size: 28px;
   line-height: 20px;
-  color: variables.$color-brand;
+  color: var(--color-brand);
 }
 
 .listCards {
@@ -70,11 +70,11 @@
   font-size: 24px;
   font-weight: 700;
   line-height: 28px;
-  color: variables.$color-text-primary;
+  color: var(--color-text-primary);
 }
 
 .emptySubtitle {
   font-size: 16px;
   line-height: 20px;
-  color: #afadb5;
+  color: var(--color-text-secondary);
 }

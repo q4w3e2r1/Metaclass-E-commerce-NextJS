@@ -13,7 +13,7 @@
 
 .triggerOpen {
   :global(input) {
-    outline: 1px solid variables.$color-brand;
+    outline: 1px solid var(--color-brand);
   }
 }
 
@@ -23,7 +23,7 @@
   left: 0;
   width: 100%;
   min-width: 280px;
-  background: #ffffff;
+  background: var(--color-surface);
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
   z-index: 1000;
   display: flex;
@@ -37,14 +37,14 @@
   gap: variables.$space-xxs;
 
   & + & {
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-top: 1px solid var(--color-border);
   }
 }
 
 .sectionTitle {
   font-size: 12px;
   line-height: 16px;
-  color: #afadb5;
+  color: var(--color-text-secondary);
   font-weight: 500;
 }
 
@@ -59,20 +59,20 @@
   padding: 0 12px;
   font-size: 14px;
   font-family: inherit;
-  color: variables.$color-text-primary;
-  background: rgba(0, 0, 0, 0.04);
+  color: var(--color-text-primary);
+  background: var(--color-hover);
   border: 1px solid transparent;
   cursor: pointer;
   transition: all 0.1s;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.08);
+    background: var(--color-hover-strong);
   }
 }
 
 .presetActive {
-  border-color: variables.$color-brand;
-  color: variables.$color-brand;
+  border-color: var(--color-brand);
+  color: var(--color-brand);
   background: rgba(81, 133, 129, 0.08);
 }
 
@@ -83,6 +83,6 @@
 }
 
 .rangeSeparator {
-  color: #afadb5;
+  color: var(--color-text-secondary);
   flex-shrink: 0;
 }

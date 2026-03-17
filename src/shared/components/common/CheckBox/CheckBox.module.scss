@@ -11,9 +11,9 @@
   margin: 0;
   padding: 0;
 
-  border: 1px solid #afadb5;
+  border: 1px solid var(--color-text-secondary);
   border-radius: 0;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   background-image: none;
   background-position: center;
   background-repeat: no-repeat;
@@ -23,7 +23,7 @@
   transition: border 0.1s ease-in-out;
 
   &:hover {
-    border: 1px solid variables.$color-brand;
+    border: 1px solid var(--color-brand);
   }
 
   &:checked {
@@ -33,11 +33,11 @@
 
 .disabled {
   cursor: not-allowed;
-  background-color: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: var(--color-hover);
+  border: 1px solid var(--color-border);
 
   &:hover {
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-border);
   }
 
   &:checked {

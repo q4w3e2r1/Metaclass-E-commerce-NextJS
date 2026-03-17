@@ -26,6 +26,34 @@ p {
 
   color: variables.$color-text-primary;
   background-color: $screen-color;
+
+  --color-text-primary: #000000;
+  --color-text-secondary: #afadb5;
+  --color-brand: #518581;
+  --color-border: #f3f3f3;
+  --color-surface: #ffffff;
+  --color-hover: rgba(0, 0, 0, 0.04);
+  --color-hover-strong: rgba(0, 0, 0, 0.08);
+  --color-skeleton-base: #d9d9d9;
+  --color-skeleton-highlight: #ababab;
+  --color-brand-active: #487773;
+}
+
+:root.dark {
+  --color-bg: #1a1a1a;
+  --color-surface: #252525;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #888888;
+  --color-border: #333333;
+  --color-brand: #3d6e6a;
+  --color-hover: rgba(255, 255, 255, 0.08);
+  --color-hover-strong: rgba(255, 255, 255, 0.12);
+  --color-skeleton-base: #2a2a2a;
+  --color-skeleton-highlight: #3a3a3a;
+  --color-brand-active: #2f5552;
+
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
 }
 
 body {

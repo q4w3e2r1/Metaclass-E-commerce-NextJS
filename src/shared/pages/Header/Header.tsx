@@ -1,16 +1,18 @@
 'use client';
+import ThemeToggle from '@components/ThemeToggle';
 import { routes } from '@config/routes';
 import CartModal from '@pages/CartModal';
 
 import { useState } from 'react';
-import { getToken } from '@/shared/api/auth/store';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-import styles from './Header.module.scss';
+import { getToken } from '@/shared/api/auth/store';
 import { useCart } from '@/shared/hooks/cart/useCartQuery';
+
+import styles from './Header.module.scss';
 
 export const Header = () => {
   const pathname = usePathname();
@@ -54,9 +56,9 @@ export const Header = () => {
             >
               <Link href={routes.categories.getRoute()}>Categories</Link>
             </li>
-            <li>About us</li>
           </ul>
           <div className={styles['user-tools']}>
+            <ThemeToggle />
             <button
               type="button"
               className={styles.iconBtn}
@@ -73,9 +75,6 @@ export const Header = () => {
                 )}
               </div>
             </button>
-            <div className={styles.icon}>
-              <Image src="/user.svg" alt="user" fill />
-            </div>
           </div>
         </div>
       </header>

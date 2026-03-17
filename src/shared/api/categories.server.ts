@@ -1,7 +1,4 @@
-import type {
-  Product,
-  StrapiResponse,
-} from '@app-types/product';
+import type { Product, StrapiResponse } from '@app-types/product';
 
 import { buildQuery } from './queryBuilder';
 

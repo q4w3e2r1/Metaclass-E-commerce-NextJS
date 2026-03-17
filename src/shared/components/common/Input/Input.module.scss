@@ -15,13 +15,13 @@
   box-sizing: border-box;
 
   border: none;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
 
   font-size: 16px;
   line-height: 20px;
   font-weight: 400;
 
-  color: variables.$color-text-primary;
+  color: var(--color-text-primary);
 
   outline: 1px solid transparent;
 
@@ -38,11 +38,11 @@
 }
 
 .input:focus {
-  outline: 1px solid variables.$color-brand;
+  outline: 1px solid var(--color-brand);
 }
 
 .input:disabled {
-  color: #afadb5;
+  color: var(--color-text-secondary);
 }
 
 .afterSlot {

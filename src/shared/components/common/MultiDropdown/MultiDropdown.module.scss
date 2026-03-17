@@ -15,7 +15,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
   z-index: 1000;
   margin-top: 4px;
@@ -32,7 +32,7 @@
   font-size: 16px;
   line-height: 20px;
   cursor: pointer;
-  color: variables.$color-text-primary;
+  color: var(--color-text-primary);
 
   background: none;
   border: none;
@@ -43,9 +43,9 @@
 }
 
 .option:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: var(--color-hover);
 }
 
 .selected {
-  color: variables.$color-brand;
+  color: var(--color-brand);
 }

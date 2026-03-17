@@ -2,8 +2,8 @@
 @use 'styles/mixins';
 
 .header {
-  border-bottom: 2px solid #f3f3f3;
-  background-color: #ffffff;
+  border-bottom: 2px solid var(--color-border); // было #f3f3f3
+  background-color: var(--color-surface);
   padding: 0 20px;
   width: 100%;
 
@@ -29,6 +29,11 @@
   align-items: center;
   flex-direction: column;
   cursor: pointer;
+  width: 130px;
+
+  :global(.dark) & {
+    filter: invert(1);
+  }
 
   @include mixins.respond('md') {
     flex-direction: row;
@@ -69,7 +74,7 @@
   }
 
   @media (max-width: 550px) {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   li {
@@ -87,7 +92,7 @@
 }
 
 .user-tools {
-  width: 77px;
+  width: 130px;
   display: flex;
   gap: 0.5rem;
   justify-content: center;
@@ -106,7 +111,7 @@
 
   @include mixins.respond('md') {
     gap: 1.5rem;
-    width: 119px;
+    width: 130px;
 
     img {
       width: 30px;
@@ -148,6 +153,10 @@
   width: 30px;
   height: 30px;
   transition: all 0.3s ease;
+
+  :global(.dark) & {
+    filter: invert(1); // инвертируем цвет — чёрный становится белым
+  }
 
   @media (max-width: 400px) {
     width: 25px;

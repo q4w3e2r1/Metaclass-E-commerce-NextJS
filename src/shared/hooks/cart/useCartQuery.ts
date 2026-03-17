@@ -24,7 +24,17 @@ export const useCart = () => {
             i.product.id === productId ? { ...i, quantity: i.quantity + 1 } : i
           );
         }
-        return old;
+        return [
+          ...old,
+          {
+            id: Date.now(),
+            documentId: '',
+            product: { id: productId } as any,
+            quantity: 1,
+            createdAt: '',
+            updatedAt: '',
+          },
+        ];
       });
 
       return { previous };

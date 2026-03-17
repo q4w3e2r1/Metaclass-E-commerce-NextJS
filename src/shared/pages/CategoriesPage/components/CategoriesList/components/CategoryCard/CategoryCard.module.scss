@@ -2,7 +2,7 @@
 
 .card {
   max-width: 360px;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   box-sizing: border-box;
   cursor: pointer;
   transition: box-shadow 0.15s ease-in-out;
@@ -24,7 +24,7 @@
   grid-template-rows: 1fr 1fr;
   width: 100%;
   height: 358px;
-  background-color: #d9d9d9;
+  background-color: var(--color-skeleton-base);
   flex-shrink: 0;
   overflow: hidden;
 }
@@ -42,7 +42,7 @@
 .placeholder {
   width: 100%;
   height: 100%;
-  background-color: #f3f3f3;
+  background-color: var(--color-hover);
 }
 
 .content {
@@ -57,11 +57,11 @@
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
-  color: variables.$color-text-primary;
+  color: var(--color-text-primary);
 }
 
 .count {
   font-size: 16px;
   line-height: 20px;
-  color: #afadb5;
+  color: var(--color-text-secondary);
 }

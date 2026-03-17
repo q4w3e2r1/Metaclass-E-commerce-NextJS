@@ -53,15 +53,15 @@
 }
 
 .color-primary {
-  color: variables.$color-text-primary;
+  color: var(--color-text-primary);
 }
 
 .color-secondary {
-  color: #afadb5;
+  color: var(--color-text-secondary);
 }
 
 .color-accent {
-  color: variables.$color-brand;
+  color: var(--color-brand);
 }
 
 .maxLines {

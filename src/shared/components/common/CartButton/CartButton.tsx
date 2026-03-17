@@ -4,7 +4,7 @@ import { Button } from '@components';
 import { routes } from '@config/routes';
 import { useCart } from '@hooks/cart/useCartQuery';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo } from 'react';
 import type { ReactNode } from 'react';
 
 import { usePathname, useRouter } from 'next/navigation';
@@ -21,22 +21,12 @@ export const CartButton = ({
   children,
 }: CartButtonProps) => {
   const { cart, addToCart, removeFromCart } = useCart();
-  const [showLoading, setShowLoading] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
   const isInCart = useMemo(() => {
     return cart?.some((item) => item.product.id === productId) ?? false;
   }, [cart, productId]);
-
-  const prevIsInCartRef = useRef(isInCart);
-
-  useEffect(() => {
-    if (prevIsInCartRef.current !== isInCart && showLoading) {
-      setShowLoading(false);
-    }
-    prevIsInCartRef.current = isInCart;
-  }, [isInCart, showLoading]);
 
   const handleClick = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -48,26 +38,15 @@ export const CartButton = ({
       return;
     }
 
-    setShowLoading(true);
-
-    try {
-      if (isInCart) {
-        await removeFromCart(productId);
-      } else {
-        await addToCart(productId);
-      }
-    } catch {
-      setShowLoading(false);
+    if (isInCart) {
+      await removeFromCart(productId);
+    } else {
+      await addToCart(productId);
     }
   };
 
   return (
-    <Button
-      onClick={handleClick}
-      className={className}
-      loading={showLoading}
-      minWidth={155}
-    >
+    <Button onClick={handleClick} className={className} minWidth={155}>
       {children || (isInCart ? 'Delete from Cart' : 'Add to Cart')}
     </Button>
   );

@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 const colorMap = {
-  primary: '#000000',
-  secondary: '#AFADB5',
-  accent: '#518581',
+  primary: 'var(--color-text-primary)',
+  secondary: 'var(--color-text-secondary)',
+  accent: 'var(--color-brand)',
 };
 
 export type IconProps = React.SVGAttributes<SVGElement> & {

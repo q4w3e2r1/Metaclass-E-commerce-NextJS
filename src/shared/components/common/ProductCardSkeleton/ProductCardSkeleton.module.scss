@@ -3,10 +3,10 @@
 @mixin shimmer-effect {
   background: linear-gradient(
     90deg,
-    #d9d9d9 0%,
-    #ababab 60%,
-    #ababab 70%,
-    #d9d9d9 98%
+    var(--color-skeleton-base) 0%,
+    var(--color-skeleton-highlight) 60%,
+    var(--color-skeleton-highlight) 70%,
+    var(--color-skeleton-base) 98%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
@@ -23,7 +23,7 @@
 
 .skeletonCard {
   max-width: 360px;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   box-sizing: border-box;
   cursor: default;
   transition: box-shadow 0.15s ease-in-out;
