@@ -1,5 +1,5 @@
 'use client';
-import { Card, CartButton, ProductCardSkeleton } from '@components';
+import { Button, Card, CartButton, ProductCardSkeleton } from '@components';
 import { routes } from '@config/routes';
 import { useCart } from '@hooks/cart/useCartQuery';
 import { useInfiniteProducts } from '@hooks/products/useInfiniteProducts';
@@ -118,11 +118,20 @@ export const ProductsList = () => {
                     >
                       <Card
                         image={imageUrl}
+                        captionSlot={product.productCategory?.title}
                         title={product.title}
                         priority={productIndex === 0 && pageIndex === 0}
                         subtitle={product.description}
                         contentSlot={<span>{product.price}</span>}
-                        actionSlot={<CartButton productId={product.id} />}
+                        discountPercent={product.discountPercent}
+                        price={product.price}
+                        actionSlot={
+                          product.isInStock ? (
+                            <CartButton productId={product.id} />
+                          ) : (
+                            <Button disabled>Out of stock</Button>
+                          )
+                        }
                       />
                     </Link>
                   </div>

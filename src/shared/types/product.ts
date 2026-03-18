@@ -45,6 +45,8 @@ export interface Product {
   productCategory?: ProductCategory;
   createdAt?: string;
   updatedAt?: string;
+  isInStock?: boolean
+  discountPercent?:number;
 }
 
 export interface Pagination {
